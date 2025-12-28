@@ -90,12 +90,128 @@ export const CLIENT_LOGOS = [
 ];
 
 export const PORTFOLIO: PortfolioItem[] = [
-  { client: 'Akeza Sports', category: 'Branding', imageUrl: 'https://images.unsplash.com/photo-1542744094-3a31f272c491?auto=format&fit=crop&q=80&w=2070' },
-  { client: 'Lumitel', category: 'Campaign', imageUrl: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=2070' },
-  { client: 'KFC Uganda', category: 'Activations', imageUrl: 'https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=2070' },
-  { client: 'Primus', category: 'Campaign', imageUrl: 'https://images.unsplash.com/photo-1514525253361-b874836371c7?auto=format&fit=crop&q=80&w=2074' },
-  { client: 'ILO/UN', category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=2187' },
-  { client: 'Vital-O', category: 'Digital', imageUrl: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070' }
+  { 
+    id: 'akeza-01',
+    client: 'Akeza Sports', 
+    category: 'Branding', 
+    imageUrl: 'https://images.unsplash.com/photo-1542744094-3a31f272c491?auto=format&fit=crop&q=80&w=2070',
+    tagline: 'Revolutionizing the sports narrative in Burundi.',
+    description: 'A complete identity overhaul for the nation\'s premier sports news portal.',
+    challenge: 'Akeza Sports needed to move from a basic blog to a high-performance sports media brand that appealed to both youth and corporate sponsors.',
+    solution: 'We developed a dynamic, movement-inspired visual system and a strategy focused on "athlete storytelling."',
+    results: '45% increase in unique monthly visitors and secured 3 major corporate long-term partnerships within the first quarter.',
+    moreImages: [
+      'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1461896711905-23f05327a36c?auto=format&fit=crop&q=80&w=1200'
+    ]
+  },
+  { 
+    id: 'lumitel-01',
+    client: 'Lumitel', 
+    category: 'Campaign', 
+    imageUrl: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=2070',
+    tagline: 'Connecting the unconnected across the hills.',
+    description: 'A nationwide rural awareness campaign for telecommunications access.',
+    challenge: 'How to communicate technical benefits of 4G to rural populations with low digital literacy?',
+    solution: 'An activation-heavy campaign using traditional storytelling and community influencers ("The Hill Heroes").',
+    results: 'Achieved 200,000 new activations in rural sectors and 90% brand recall in target zones.',
+    moreImages: [
+      'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=1200'
+    ]
+  },
+  { 
+    id: 'kfc-01',
+    client: 'KFC Uganda', 
+    category: 'Activations', 
+    imageUrl: 'https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=2070',
+    tagline: 'Finger Lickin\' Experiences.',
+    description: 'Strategic engagement for product launches in the Kampala market.',
+    challenge: 'Re-igniting the buzz around a heritage brand in a competitive fast-food market.',
+    solution: 'Gamified "Secret Spice" treasure hunts and immersive outdoor dining pop-ups.',
+    results: 'Record-breaking launch weekend sales and 15M+ social media impressions.',
+    moreImages: [
+      'https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?auto=format&fit=crop&q=80&w=1200'
+    ]
+  },
+  { 
+    id: 'primus-01',
+    client: 'Primus', 
+    category: 'Campaign', 
+    imageUrl: 'https://images.unsplash.com/photo-1514525253361-b874836371c7?auto=format&fit=crop&q=80&w=2074',
+    tagline: 'The Spirit of Celebration.',
+    description: 'National festive season campaign blending heritage with modern vibes.',
+    challenge: 'Maintaining dominance as the national beverage while appearing fresh to Gen Z.',
+    solution: 'Visual identity refreshment focusing on "Shared Moments" and digital-first content creation.',
+    results: '12% volume growth during the festive period and high engagement on digital channels.',
+    moreImages: [
+      'https://images.unsplash.com/photo-1532634896-26909d0d4b89?auto=format&fit=crop&q=80&w=1200'
+    ]
+  },
+  { 
+    id: 'un-01',
+    client: 'ILO/UN', 
+    category: 'Strategy', 
+    imageUrl: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=2187',
+    tagline: 'Decent Work for a Better Future.',
+    description: 'Communication strategy for youth employment advocacy.',
+    challenge: 'Making policy discussions relevant and engaging for the youth population.',
+    solution: 'A "Work Your Way" platform featuring peer-to-peer inspiration and clear pathfinding content.',
+    results: 'Policy reach increased by 300% among target age groups and high workshop participation.',
+    moreImages: [
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200'
+    ]
+  },
+  { 
+    id: 'vital-01',
+    client: 'Vital-O', 
+    category: 'Digital', 
+    imageUrl: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070',
+    tagline: 'Fueling the Championship Mindset.',
+    description: 'Digital ecosystem development for Burundi\'s legendary sports club.',
+    challenge: 'A legacy club with no digital footprint or fan engagement platform.',
+    solution: 'Custom fan app and social content machine for live updates and historical archives.',
+    results: 'Reached #1 trending sports app in local store and built a 50k+ active digital fan base.',
+    moreImages: [
+      'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&q=80&w=1200'
+    ]
+  },
+  // Extra items for "Load More" demonstration
+  { 
+    id: 'bgf-01',
+    client: 'BGF', 
+    category: 'Strategy', 
+    imageUrl: 'https://images.unsplash.com/photo-1454165833767-131438967b67?auto=format&fit=crop&q=80&w=2070',
+    tagline: 'Financing the Future.',
+    description: 'Strategic repositioning for a growing financial institution.',
+    challenge: 'Perceived as "too traditional" for emerging SME entrepreneurs.',
+    solution: 'Brand modernization and "Business First" communications approach.',
+    results: '20% increase in SME account openings in the first 6 months.',
+    moreImages: []
+  },
+  { 
+    id: 'serenity-01',
+    client: 'Serenity Insurance', 
+    category: 'Branding', 
+    imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=2070',
+    tagline: 'Peace of Mind, Redefined.',
+    description: 'Visual identity for a new player in the insurance market.',
+    challenge: 'Creating trust in a market skeptical of insurance providers.',
+    solution: 'Clean, transparent visual language and simple-to-understand product icons.',
+    results: 'Successfully launched with 5,000+ policies in month one.',
+    moreImages: []
+  },
+  { 
+    id: 'akeza-02',
+    client: 'Akeza Sports Awards', 
+    category: 'Activations', 
+    imageUrl: 'https://images.unsplash.com/photo-1531050171669-70c4f28e50fb?auto=format&fit=crop&q=80&w=2070',
+    tagline: 'Celebrating Excellence.',
+    description: 'Full event production and brand activation for an annual gala.',
+    challenge: 'Elevating a local ceremony to a regional-class televised event.',
+    solution: 'Immersive light-and-sound stage design and live digital red carpet integration.',
+    results: 'National TV broadcast reached 2M+ viewers and trended #1 on social media.',
+    moreImages: []
+  }
 ];
 
 export const SERVICE_CATEGORIES = [

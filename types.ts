@@ -17,7 +17,14 @@ export interface ProcessStep {
 }
 
 export interface PortfolioItem {
+  id: string;
   client: string;
   category: string;
   imageUrl: string;
+  tagline?: string;
+  description?: string;
+  challenge?: string;
+  solution?: string;
+  results?: string;
+  moreImages?: string[];
 }
