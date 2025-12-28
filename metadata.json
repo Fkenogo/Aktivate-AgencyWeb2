@@ -1,0 +1,7 @@
+{
+  "name": "Aktivate Agency Website",
+  "description": "A high-performance, modern branding and advertising agency website for Aktivate, featuring sequential animations, a robust design system, and multi-page navigation.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
