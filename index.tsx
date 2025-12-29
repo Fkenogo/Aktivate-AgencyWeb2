@@ -1,15 +1,15 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
+// Defensive mount: ensure element exists and give a clear console error.
+const mountNode = document.getElementById("root");
+if (!mountNode) {
+  console.error('Mount node not found. Make sure index.html contains <div id="root"></div>');
+  throw new Error('Mount node "#root" not found in index.html');
 }
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
+createRoot(mountNode).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
