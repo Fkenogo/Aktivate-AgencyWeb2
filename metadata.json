@@ -1,0 +1,8 @@
+{
+  "name": "AKTIVATE AgencyWeb2",
+  "description": "A high-end brand and advertising agency website built for business owners in East Africa, featuring modern animations, a robust design system, and multi-page functionality.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
