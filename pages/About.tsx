@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
 import SectionHeader from '../components/SectionHeader';
 
 const About: React.FC = () => {
@@ -29,8 +27,7 @@ const About: React.FC = () => {
         <h1 className="text-[40px] md:text-[64px] font-[800] leading-tight mb-8 uppercase tracking-tighter">WE ARE AKTIVATORS</h1>
         <p className="text-[18px] md:text-[24px] max-w-[800px] mx-auto text-[#F5F5F5] leading-relaxed">
           The renegade strategists of Burundi. <br />
-          The ones who turn products into movements. <br />
-          The ones who don't ask for permission.
+          The ones who turn products into movements.
         </p>
       </section>
 
@@ -41,7 +38,7 @@ const About: React.FC = () => {
             <img 
               src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=75&w=800&fm=webp" 
               alt="Team creative workspace" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+              className="w-full h-full object-cover grayscale" 
               loading="lazy"
             />
           </div>
@@ -69,32 +66,14 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {differences.map((diff, i) => (
               <div key={i} className="bg-white p-10 rounded-[16px] border-l-4 border-[#1AB69D] relative overflow-hidden group shadow-lg">
-                <span className="absolute top-[-10px] right-[-10px] text-[100px] font-black text-[#1AB69D]/5 leading-none group-hover:text-[#1AB69D]/10 transition-colors">
+                <span className="absolute top-[-10px] right-[-10px] text-[100px] font-black text-[#1AB69D]/5 leading-none">
                   {diff.id}
                 </span>
                 <h3 className="text-xl font-bold text-[#0A0A0A] mb-6 relative z-10">{diff.title}</h3>
-                <p className="text-[#2D2D2D] leading-[1.8] relative z-10">{diff.desc}</p>
+                <p className="text-[#2D2D2D] text-[14px] leading-[1.4] relative z-10">{diff.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Why Aktivate? */}
-      <section className="bg-[#0A0A0A] py-24 px-6 text-center text-white">
-        <div className="max-w-[700px] mx-auto">
-          <h2 className="text-[32px] md:text-[48px] font-bold mb-8">Why AKTIVATE?</h2>
-          <p className="text-[28px] md:text-[36px] font-bold text-[#1AB69D] mb-6">Simple. We deliver.</p>
-          <p className="text-[#F5F5F5] text-lg md:text-xl leading-relaxed mb-12">
-            We're Burundi's most sought-after agency because we go above and beyond to 
-            get results—not just presentations.
-          </p>
-          <Link 
-            to="/contact"
-            className="inline-block bg-[#1AB69D] text-white px-16 py-5 rounded-[8px] font-black text-lg hover:bg-[#158F7C] transition-all transform hover:scale-105 active:scale-95 shadow-2xl uppercase tracking-widest"
-          >
-            GET STARTED
-          </Link>
         </div>
       </section>
     </div>

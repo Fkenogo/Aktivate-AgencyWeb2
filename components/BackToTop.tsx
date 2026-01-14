@@ -1,12 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
-import { COLORS, SHADOWS, TRANSITIONS } from '../constants';
 
 const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show button when page is scrolled down
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
       setIsVisible(true);
@@ -30,20 +28,19 @@ const BackToTop: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div className="fixed bottom-6 right-6 z-50">
       <button
         type="button"
         onClick={scrollToTop}
         className={`
-          flex items-center justify-center w-14 h-14 rounded-full 
-          bg-[#1AB69D] text-white shadow-lg transition-all duration-300
-          hover:bg-[#158F7C] hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#1AB69D]/30
-          ${isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}
+          flex items-center justify-center w-12 h-12 rounded-full 
+          bg-[#1AB69D] text-white shadow-2xl transition-all duration-500
+          hover:bg-[#158F7C] hover:scale-110 active:scale-95 focus:outline-none
+          ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}
         `}
-        style={{ boxShadow: isVisible ? SHADOWS.strong : 'none' }}
         aria-label="Back to Top"
       >
-        <ArrowUp size={24} strokeWidth={3} />
+        <ArrowUp size={20} />
       </button>
     </div>
   );

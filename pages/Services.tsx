@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
 import SectionHeader from '../components/SectionHeader';
 
 const Services: React.FC = () => {
@@ -9,27 +7,27 @@ const Services: React.FC = () => {
       title: 'BRAND FOUNDATION',
       bg: 'bg-white',
       items: [
-        { name: 'Market Research', desc: 'We spy the market, gathering intelligence to inform every strategic decision.', details: 'Brand Health Trackers | Surveys | Competitor Analysis | Retail Audits' },
-        { name: 'Strategy Development', desc: 'We craft the roadmap for your brand\'s domination.', details: 'Marketing Strategy | Brand Strategy | Sales Strategy' },
-        { name: 'Branding & Identity', desc: 'We build brands that resonate and endure.', details: 'Positioning | Identity Development | Corporate Branding' }
+        { name: 'Market Research', desc: 'We gather intelligence to inform strategic decisions.', details: 'Brand Health Trackers | Surveys | Retail Audits' },
+        { name: 'Strategy Development', desc: 'The roadmap for your brand\'s domination.', details: 'Marketing Strategy | Brand Strategy' },
+        { name: 'Branding & Identity', desc: 'We build brands that resonate and endure.', details: 'Positioning | Identity Development' }
       ]
     },
     {
       title: 'BRAND AMPLIFICATION',
       bg: 'bg-[#F5F5F5]',
       items: [
-        { name: 'Creative & Design', desc: 'Visuals and messaging that stop the scroll.', details: 'Graphic Design | Illustrations | Branding Identity' },
-        { name: 'Content Production', desc: 'High-quality content that maximizes impact.', details: 'Audio Visual | TV Commercials | Video Animations | Photography' },
-        { name: 'Advertising', desc: 'Campaigns that generate results, not just impressions.', details: 'Campaign Concepts | Planning | Media Buying | Monitoring' }
+        { name: 'Creative & Design', desc: 'Visuals and messaging that stop the scroll.', details: 'Graphic Design | Illustrations' },
+        { name: 'Content Production', desc: 'High-quality content that maximizes impact.', details: 'Audio Visual | Video Animations' },
+        { name: 'Advertising', desc: 'Campaigns that generate results.', details: 'Campaign Concepts | Media Buying' }
       ]
     },
     {
       title: 'CUSTOMER ENGAGEMENT',
       bg: 'bg-white',
       items: [
-        { name: 'Digital Marketing', desc: 'We craft digital experiences that connect.', details: 'Digital Strategy | Social Media | Web Development | SEO' },
-        { name: 'Experiential Events', desc: 'Immersive experiences that create brand advocates.', details: 'Brand Activations | Corporate Events | Product Launches' },
-        { name: 'Media & PR', desc: 'We manage your reputation and amplify your voice.', details: 'Crisis Management | Press Engagements | Influencer Marketing' }
+        { name: 'Digital Marketing', desc: 'We craft digital experiences that connect.', details: 'Digital Strategy | Social Media' },
+        { name: 'Experiential Events', desc: 'Immersive experiences that create brand advocates.', details: 'Brand Activations | Corporate Events' },
+        { name: 'Media & PR', desc: 'Managing your reputation and voice.', details: 'Crisis Management | PR' }
       ]
     }
   ];
@@ -40,7 +38,7 @@ const Services: React.FC = () => {
       <section className="bg-[#0A0A0A] py-24 md:py-40 px-6 text-center text-white">
         <h1 className="text-[40px] md:text-[56px] font-[800] leading-tight mb-8 uppercase tracking-tight">From Insight to Ignition</h1>
         <p className="text-[18px] md:text-[24px] max-w-[800px] mx-auto text-[#F5F5F5] leading-relaxed">
-          Full-service solutions that transform brands at every touchpoint.
+          Full-service solutions that transform brands.
         </p>
       </section>
 
@@ -55,9 +53,9 @@ const Services: React.FC = () => {
               {cat.items.map((service, j) => (
                 <div key={j} className="space-y-4">
                   <h3 className="text-[24px] font-bold text-[#0A0A0A]">{service.name}</h3>
-                  <p className="text-[#2D2D2D] text-lg leading-relaxed">{service.desc}</p>
-                  <div className="bg-[#F5F5F5] p-6 rounded-[8px] border-l-2 border-[#1AB69D]/30">
-                    <p className="text-sm text-[#2D2D2D] leading-relaxed italic">{service.details}</p>
+                  <p className="text-[#2D2D2D] text-[15px] leading-[1.4]">{service.desc}</p>
+                  <div className="bg-black/5 p-6 rounded-[8px] border-l-2 border-[#1AB69D]/30">
+                    <p className="text-sm text-[#2D2D2D]/70 leading-relaxed italic">{service.details}</p>
                   </div>
                 </div>
               ))}
@@ -65,22 +63,6 @@ const Services: React.FC = () => {
           </div>
         </section>
       ))}
-
-      {/* Rebuilt CTA Section to match provided image */}
-      <section className="bg-[#1AB69D] py-32 px-6 text-center text-white flex flex-col items-center">
-        <h2 className="text-[42px] md:text-[64px] font-extrabold mb-6 tracking-tight leading-none drop-shadow-sm">
-          Not sure what you need?
-        </h2>
-        <p className="text-xl md:text-2xl mb-12 font-medium opacity-90 tracking-wide">
-          Let's figure it out together.
-        </p>
-        <Link 
-          to="/contact"
-          className="bg-white text-[#1AB69D] px-14 py-6 rounded-xl font-black text-lg tracking-[0.1em] hover:bg-white/95 transition-all transform hover:scale-105 active:scale-95 shadow-[0_15px_30px_rgba(0,0,0,0.15)] uppercase"
-        >
-          START A CONVERSATION
-        </Link>
-      </section>
     </div>
   );
 };
