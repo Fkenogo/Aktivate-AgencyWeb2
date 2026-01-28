@@ -135,7 +135,7 @@ const Home: React.FC = () => {
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 animate-fade-in delay-[1200ms]">
             <Link to="/contact" className="group relative inline-flex items-center justify-center bg-[#1AB69D] text-white px-12 py-5 rounded-[8px] font-bold text-lg hover:bg-[#158F7C] transition-all transform hover:scale-105 active:scale-95 shadow-2xl">
-              <span className="relative z-10 uppercase tracking-widest">GET STARTED</span>
+              <span className="relative z-10 uppercase tracking-widest">GET AKTIVATED</span>
             </Link>
             <Link to="/work" className="text-white px-12 py-5 rounded-[8px] font-bold text-lg border-2 border-white/30 backdrop-blur-sm hover:border-white hover:bg-white/10 transition-all uppercase tracking-widest">
               Our Work

@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
 
   // Dynamic classes for the nav container
   const navStyles = isScrolled 
-    ? 'bg-white/90 backdrop-blur-md shadow-lg h-[70px]' 
+    ? 'bg-white/95 backdrop-blur-md shadow-sm h-[70px]' 
     : 'bg-transparent h-[90px]';
 
   const textStyles = isScrolled ? 'text-[#0A0A0A]' : 'text-white';
@@ -33,13 +33,15 @@ const Navbar: React.FC = () => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out flex items-center ${navStyles}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out flex items-center border-b ${
+        isScrolled ? 'border-black/5' : 'border-transparent'
+      } ${navStyles}`}
     >
       <div className="max-w-[1440px] mx-auto w-full px-6 md:px-[120px] flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center group">
           <span 
-            className={`text-2xl md:text-3xl font-extrabold italic transition-colors duration-500 tracking-tighter ${logoStyles}`}
+            className={`text-2xl md:text-3xl font-black italic transition-colors duration-500 tracking-tighter ${logoStyles}`}
           >
             AKTIVATE
           </span>
@@ -53,23 +55,27 @@ const Navbar: React.FC = () => {
               <Link 
                 key={link.path}
                 to={link.path}
-                className={`font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:text-[#1AB69D] relative group ${textStyles}`}
+                className={`font-bold text-[13px] uppercase tracking-[0.15em] transition-colors duration-300 hover:text-[#1AB69D] relative group py-2 ${
+                  isActive ? 'text-[#1AB69D]' : textStyles
+                }`}
               >
                 {link.name}
+                {/* Subtle Animated Underline */}
                 <span 
-                  className={`absolute bottom-[-4px] left-0 h-[2px] bg-[#1AB69D] transition-all duration-500 ${
-                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  className={`absolute bottom-0 left-0 h-[2px] bg-[#1AB69D] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] origin-left ${
+                    isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100 w-full'
                   }`}
+                  style={{ width: '100%' }}
                 ></span>
               </Link>
             );
           })}
           <Link 
             to="/contact"
-            className={`px-8 py-3 rounded-[4px] font-bold text-xs uppercase tracking-widest transition-all transform hover:scale-105 active:scale-95 ${
+            className={`px-7 py-2.5 rounded-[4px] font-bold text-[11px] uppercase tracking-[0.2em] transition-all transform hover:scale-[1.02] active:scale-95 ${
               isScrolled 
-                ? 'bg-[#1AB69D] text-white hover:bg-[#158F7C] shadow-md' 
-                : 'bg-white text-[#0A0A0A] hover:bg-[#1AB69D] hover:text-white'
+                ? 'bg-[#1AB69D] text-white hover:bg-[#158F7C] shadow-sm' 
+                : 'bg-white text-[#0A0A0A] hover:bg-[#1AB69D] hover:text-white shadow-lg'
             }`}
           >
             GET AKTIVATED
@@ -82,7 +88,7 @@ const Navbar: React.FC = () => {
           onClick={() => setIsMobileMenuOpen(true)}
           aria-label="Open Menu"
         >
-          <Menu size={28} />
+          <Menu size={24} />
         </button>
       </div>
 
@@ -96,28 +102,33 @@ const Navbar: React.FC = () => {
           className="absolute top-6 right-6 text-white p-2 hover:rotate-90 transition-transform duration-300"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <X size={36} />
+          <X size={32} />
         </button>
         
         <div className="flex flex-col items-center space-y-6">
-          <span className="text-[#1AB69D] text-xs font-black uppercase tracking-[0.3em] mb-4">Navigate</span>
-          {navLinks.map((link) => (
-            <Link 
-              key={link.path}
-              to={link.path}
-              className="text-white text-3xl font-black uppercase tracking-tighter hover:text-[#1AB69D] transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
+          <span className="text-[#1AB69D] text-[10px] font-black uppercase tracking-[0.5em] mb-4 opacity-50">Menu</span>
+          {navLinks.map((link) => {
+             const isActive = location.pathname === link.path;
+             return (
+              <Link 
+                key={link.path}
+                to={link.path}
+                className={`text-3xl font-black uppercase tracking-tighter transition-colors ${
+                  isActive ? 'text-[#1AB69D]' : 'text-white hover:text-[#1AB69D]'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
           <div className="pt-8">
             <Link 
               to="/contact"
-              className="bg-[#1AB69D] text-white px-12 py-5 rounded-full text-xl font-black hover:bg-[#158F7C] shadow-2xl transition-all active:scale-95"
+              className="bg-[#1AB69D] text-white px-10 py-4 rounded-full text-lg font-black tracking-widest hover:bg-[#158F7C] shadow-2xl transition-all active:scale-95 uppercase"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              GET AKTIVATED
+              Contact Us
             </Link>
           </div>
         </div>
