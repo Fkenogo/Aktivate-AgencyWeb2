@@ -5,99 +5,134 @@ import { Instagram, Facebook, Linkedin, Phone, Mail, MapPin } from 'lucide-react
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Expertise', path: '/services' },
+    { name: 'Our Work', path: '/work' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
+  const expertiseItems = [
+    'Brand Intelligence & Research',
+    'Brand Strategy & Development',
+    'Brand Management & Advisory',
+    'Creative & Communications',
+    'Brand Experiences & Activations',
+  ];
+
   return (
-    <footer className="bg-[#0A0A0A] text-white border-t border-white/5 w-full h-auto">
-      {/* Main Footer Strip */}
-      <div 
-        className="max-w-[1200px] mx-auto px-[48px] pt-[32px] pb-[24px]"
-      >
-        <div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px] items-start"
-          style={{ gridTemplateColumns: window.innerWidth >= 1024 ? '28% 18% 27% 27%' : undefined }}
-        >
-          
-          {/* Column 1: Brand (28%) */}
-          <div className="space-y-[12px]">
-            <Link to="/" className="text-[18px] font-[900] italic text-[#1AB69D] tracking-tighter block leading-none">
-              AKTIVATE
+    <footer className="bg-[#1B252B] text-white border-t border-white/10 w-full">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 pt-14 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 items-start">
+          {/* Brand Summary */}
+          <div className="lg:col-span-4 space-y-4">
+            <Link to="/" className="inline-block" aria-label="Aktivate Home">
+              <img
+                src="/assets/aistudio/aktivate_logo-01_232a8292.png"
+                alt="Aktivate"
+                className="h-7 w-auto object-contain brightness-0 invert"
+              />
             </Link>
-            <p className="text-white/50 text-[12px] leading-[1.35] max-w-[200px]">
-              Alchemists of experience and brand evangelists of Burundi.
+            <p className="text-white/75 text-sm leading-relaxed max-w-[30ch]">
+              Building stronger brands. Managing them better.
             </p>
-            <div className="flex space-x-3 pt-1">
-              {[Instagram, Facebook, Linkedin].map((Icon, i) => (
-                <a 
-                  key={i} 
-                  href="#" 
-                  className="text-white/30 hover:text-[#1AB69D] transition-colors duration-300"
-                  aria-label="Social Media"
-                >
-                  <Icon size={14} />
-                </a>
-              ))}
+            <p className="text-[#15B8A6] text-xs font-semibold tracking-wide">
+              Imagine. Dare. Create.
+            </p>
+            <div className="flex items-center gap-4 pt-1">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white/60 hover:text-[#15B8A6] transition-colors p-1.5 -ml-1.5"
+                aria-label="Aktivate on Instagram"
+              >
+                <Instagram size={18} />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white/60 hover:text-[#15B8A6] transition-colors p-1.5"
+                aria-label="Aktivate on Facebook"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white/60 hover:text-[#15B8A6] transition-colors p-1.5"
+                aria-label="Aktivate on LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
             </div>
           </div>
 
-          {/* Column 2: Navigate (18%) */}
-          <div>
-            <h4 className="text-white text-[13px] font-bold uppercase tracking-wider mb-[10px]">Navigate</h4>
-            <ul className="space-y-[6px]">
-              {['About', 'Services', 'Work', 'Blog', 'Contact'].map((name) => (
-                <li key={name}>
-                  <Link 
-                    to={`/${name.toLowerCase()}`} 
-                    className="text-white/50 hover:text-[#1AB69D] text-[12px] transition-colors leading-[1.35]"
+          {/* Navigate */}
+          <div className="lg:col-span-2">
+            <h3 className="text-white text-xs font-semibold uppercase tracking-[0.16em] mb-4">
+              Navigate
+            </h3>
+            <ul className="space-y-2.5">
+              {navItems.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    className="text-white/75 hover:text-[#15B8A6] text-sm transition-colors"
                   >
-                    {name}
+                    {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Services (27%) */}
-          <div>
-            <h4 className="text-white text-[13px] font-bold uppercase tracking-wider mb-[10px]">Services</h4>
-            <ul className="space-y-[6px]">
-              {['Brand Strategy', 'Creative & Design', 'Digital Marketing', 'Activations'].map((item) => (
-                <li key={item} className="text-white/50 text-[12px] leading-[1.35]">
+          {/* Expertise */}
+          <div className="lg:col-span-3">
+            <h3 className="text-white text-xs font-semibold uppercase tracking-[0.16em] mb-4">
+              Expertise
+            </h3>
+            <ul className="space-y-2.5">
+              {expertiseItems.map((item) => (
+                <li key={item} className="text-white/75 text-sm">
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4: Connect (27%) */}
-          <div>
-            <h4 className="text-white text-[13px] font-bold uppercase tracking-wider mb-[10px]">Connect</h4>
-            <ul className="space-y-[8px]">
-              <li className="flex items-center text-white font-bold text-[12px] leading-[1.35]">
-                <Phone size={14} className="text-[#1AB69D] mr-3 flex-shrink-0" />
-                <a href="tel:+25766511150" className="hover:text-[#1AB69D] transition-colors">
+          {/* Connect */}
+          <div className="lg:col-span-3">
+            <h3 className="text-white text-xs font-semibold uppercase tracking-[0.16em] mb-4">
+              Connect
+            </h3>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-center gap-3 text-white/85">
+                <Phone size={15} className="text-[#15B8A6] shrink-0" />
+                <a href="tel:+25766511150" className="hover:text-[#15B8A6] transition-colors tabular-nums">
                   (+257) 66 511 150
                 </a>
               </li>
-              <li className="flex items-center text-white/60 font-bold text-[12px] leading-[1.35]">
-                <Mail size={14} className="text-[#1AB69D] mr-3 flex-shrink-0" />
-                <a href="mailto:info@aktivate.bi" className="hover:text-white transition-colors">
+              <li className="flex items-center gap-3 text-white/85">
+                <Mail size={15} className="text-[#15B8A6] shrink-0" />
+                <a href="mailto:info@aktivate.bi" className="hover:text-[#15B8A6] transition-colors">
                   info@aktivate.bi
                 </a>
               </li>
-              <li className="flex items-center text-white/60 font-bold text-[12px] leading-[1.35]">
-                <MapPin size={14} className="text-[#1AB69D] mr-3 flex-shrink-0" />
+              <li className="flex items-center gap-3 text-white/75">
+                <MapPin size={15} className="text-[#15B8A6] shrink-0" />
                 <span>Bujumbura, Burundi</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Minimal Bottom Bar */}
-        <div className="mt-[24px] pt-[16px] border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-white/20 font-bold tracking-widest uppercase">
-          <p>© {currentYear} AKTIVATE. Market Domination.</p>
-          <div className="flex space-x-6 mt-2 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-          </div>
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-white/55">
+          <p>&copy; {currentYear} Aktivate. All rights reserved.</p>
+          <p>Branding &amp; Brand Management Agency · Bujumbura, Burundi</p>
         </div>
       </div>
     </footer>

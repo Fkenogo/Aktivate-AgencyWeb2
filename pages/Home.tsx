@@ -1,264 +1,614 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Palette, Megaphone, Sparkles, ChevronLeft, ArrowRight, Check } from 'lucide-react';
-import SectionHeader from '../components/SectionHeader';
+import {
+  ArrowRight,
+  Search,
+  Compass,
+  Layers,
+  PenTool,
+  CalendarRange,
+  Eye,
+  GitMerge,
+  ShieldCheck,
+  RefreshCw,
+} from 'lucide-react';
 
-const Home: React.FC = () => {
-  const [visibleWords, setVisibleWords] = useState<number>(0);
-  const [scrollY, setScrollY] = useState(0);
-  const [activeStep, setActiveStep] = useState(0);
-  const [sectionTop, setSectionTop] = useState(0);
-  const servicesSectionRef = useRef<HTMLDivElement>(null);
+interface ImageSlotProps {
+  src: string;
+  alt: string;
+  className?: string;
+  imgClassName?: string;
+  priority?: boolean;
+}
 
-  useEffect(() => {
-    const wordTimer = setInterval(() => {
-      setVisibleWords((prev) => (prev < 3 ? prev + 1 : prev));
-    }, 600);
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    if (servicesSectionRef.current) {
-      setSectionTop(servicesSectionRef.current.offsetTop);
-    }
-
-    return () => {
-      clearInterval(wordTimer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const services = [
-    {
-      id: '01',
-      icon: <Palette size={48} />,
-      title: 'BRAND FOUNDATION',
-      tagline: 'We craft the story and plot the course.',
-      list: ['Strategy Development', 'Branding & Identity', 'Market Research'],
-      speed: -0.03
-    },
-    {
-      id: '02',
-      icon: <Megaphone size={48} />,
-      title: 'AMPLIFICATION',
-      tagline: 'We get your message to the right people.',
-      list: ['Media & PR', 'Advertising', 'Content Production'],
-      speed: 0.02
-    },
-    {
-      id: '03',
-      icon: <Sparkles size={48} />,
-      title: 'ENGAGEMENT',
-      tagline: 'We create experiences that leave a mark.',
-      list: ['Digital Marketing', 'Social Media', 'Activations'],
-      speed: 0.06
-    }
-  ];
-
-  const steps = [
-    { id: '01', name: 'DEEP DIVE', desc: 'Discovery & Context', detail: 'We immerse ourselves in your brand world to find the hidden gems through internal auditing.' },
-    { id: '02', name: 'DECODE', desc: 'Research & Insights', detail: 'Data-driven analysis to understand the pulse of your audience and market opportunities.' },
-    { id: '03', name: 'BLUEPRINT', desc: 'Strategic Planning', detail: 'The architectural plan for your market domination, outlining every touchpoint.' },
-    { id: '04', name: 'CREATE', desc: 'Design & Development', detail: 'Where unhinged creativity meets strategic constraints to build visual and narrative assets.' },
-    { id: '05', name: 'IGNITE', desc: 'Execution', detail: 'Launching your brand into the atmosphere with precision media buying and activations.' },
-    { id: '06', name: 'EVOLVE', desc: 'Measure & Optimize', detail: 'Continuous learning through performance tracking to ensure long-term brand health.' },
-  ];
-
-  const clients = [
-    { name: 'PRIMUS', color: '#E41E26' },
-    { name: 'LUMITEL', color: '#EF3340' },
-    { name: 'ILO/UN', color: '#008AD2' },
-    { name: 'BGF', color: '#1AB69D' },
-    { name: 'SERENITY', color: '#8E44AD' },
-    { name: 'INTERPETROL', color: '#F39C12' },
-    { name: 'AKEZA', color: '#2ECC71' },
-    { name: 'KFC', color: '#E4002B' },
-  ];
-  
-  const scrollingClients = [...clients, ...clients];
-
-  const nextStep = () => setActiveStep((prev) => (prev + 1) % steps.length);
-  const prevStep = () => setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
-
-  const getWordClasses = (index: number) => {
-    const isVisible = visibleWords >= index;
-    return `
-      inline-block transition-all duration-[1000ms] cubic-bezier(0.34, 1.56, 0.64, 1) transform
-      ${isVisible 
-        ? 'opacity-100 translate-y-0 scale-100 rotate-0 blur-0' 
-        : 'opacity-0 translate-y-16 scale-50 rotate-[-8deg] blur-xl'
-      }
-    `;
-  };
+const WorkplaceImage: React.FC<ImageSlotProps> = ({
+  src,
+  alt,
+  className = '',
+  imgClassName = 'object-cover object-center',
+  priority = false,
+}) => {
+  const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-          style={{ transform: `translate3d(0, ${scrollY * 0.35}px, 0)` }}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover scale-125"
-            poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=75&w=1920&fm=webp"
-          >
-            <source src="https://player.vimeo.com/external/494252666.sd.mp4?s=4934d63234d318e8df639c05878a2e5414d4850d&profile_id=165&oauth2_token_id=57447761" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(10,10,10,0.3)_0%,_rgba(10,10,10,0.6)_40%,_rgba(10,10,10,0.95)_100%)]" />
-          <div className="absolute inset-0 bg-[#1AB69D]/5 mix-blend-color" />
+    <div className={`relative overflow-hidden bg-[#173B48] ${className}`}>
+      {!hasError ? (
+        <img
+          src={src}
+          alt={alt}
+          referrerPolicy="no-referrer"
+          loading={priority ? 'eager' : 'lazy'}
+          decoding={priority ? 'sync' : 'async'}
+          onError={() => setHasError(true)}
+          className={`w-full h-full ${imgClassName}`}
+        />
+      ) : (
+        <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-[#102D38] to-[#1B4250] text-white/80">
+          <span className="font-heading text-sm font-semibold tracking-wide">Aktivate Studio</span>
+          <span className="text-xs text-white/60 mt-1 max-w-[28ch]">{alt}</span>
         </div>
+      )}
+    </div>
+  );
+};
 
-        <div className="z-10 relative">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8 border border-white/20 animate-fade-in shadow-xl">
-            <span className="w-2 h-2 bg-[#1AB69D] rounded-full animate-pulse"></span>
-            <span className="text-white text-xs font-black uppercase tracking-[0.3em]">Burundi's Premier Agency</span>
-          </div>
+const Home: React.FC = () => {
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
-          <h1 className="text-[52px] md:text-[96px] font-[900] text-white leading-[0.95] tracking-[-0.04em] mb-8 select-none">
-            <span className={getWordClasses(1)}>IMAGINE.</span><br />
-            <span className={getWordClasses(2)}>DARE.</span><br />
-            <span className={getWordClasses(3)}>CREATE.</span>
-          </h1>
-          
-          <p className="text-[18px] md:text-[24px] text-[#F5F5F5] max-w-[700px] mx-auto mb-12 animate-fade-in-up leading-relaxed delay-1000">
-            We are <span className="text-[#1AB69D] font-black">Aktivate.</span> <br />
-            The alchemists of experience and brand evangelists of Burundi.
-          </p>
+  const expertiseLead = [
+    {
+      num: '01',
+      title: 'Brand Intelligence & Research',
+      description:
+        'Market research, audience insight and competitive intelligence that clarify where opportunities lie and ground every brand decision in reality.',
+      icon: Search,
+    },
+    {
+      num: '02',
+      title: 'Brand Strategy & Development',
+      description:
+        'Brand positioning, architecture, verbal direction and visual identity systems built to give organisations clear differentiation and lasting relevance.',
+      icon: Compass,
+    },
+  ];
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 animate-fade-in delay-[1200ms]">
-            <Link to="/contact" className="group relative inline-flex items-center justify-center bg-[#1AB69D] text-white px-12 py-5 rounded-[8px] font-bold text-lg hover:bg-[#158F7C] transition-all transform hover:scale-105 active:scale-95 shadow-2xl">
-              <span className="relative z-10 uppercase tracking-widest">GET AKTIVATED</span>
-            </Link>
-            <Link to="/work" className="text-white px-12 py-5 rounded-[8px] font-bold text-lg border-2 border-white/30 backdrop-blur-sm hover:border-white hover:bg-white/10 transition-all uppercase tracking-widest">
-              Our Work
-            </Link>
-          </div>
-        </div>
-        
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10 flex flex-col items-center opacity-80">
-          <ChevronDown size={24} className="text-[#1AB69D]" />
-        </div>
-      </section>
+  const expertiseCore = [
+    {
+      num: '03',
+      title: 'Brand Management & Advisory',
+      description:
+        'Ongoing brand governance, portfolio alignment and practical advisory that help leadership teams keep their brand coherent as the business grows.',
+      icon: Layers,
+      featured: true,
+    },
+    {
+      num: '04',
+      title: 'Creative & Communications',
+      description:
+        'Integrated campaign concepts, copywriting, graphic design and content production crafted to connect meaningfully across channels.',
+      icon: PenTool,
+      featured: false,
+    },
+    {
+      num: '05',
+      title: 'Brand Experiences & Activations',
+      description:
+        'Product launches, live activations and customer touchpoints designed to turn brand promises into memorable real-world engagement.',
+      icon: CalendarRange,
+      featured: false,
+    },
+  ];
 
-      {/* Manifesto */}
-      <section className="bg-[#0A0A0A] py-20 md:py-[120px] px-6 md:px-[120px]">
-        <div className="max-w-[1440px] mx-auto text-center">
-          <SectionHeader dark title="WE ARE NOT YOUR AVERAGE AGENCY." />
-          <p className="text-[#F5F5F5] text-[18px] md:text-[20px] leading-[1.8] max-w-[900px] mx-auto mb-12 opacity-80">
-            We're strategists who think like creatives, and creatives who think strategically. We blend data-fueled insights with unhinged creativity to craft result-driven activations that dominate the market.
-          </p>
-          <p className="text-[#1AB69D] text-[24px] md:text-[32px] font-bold tracking-tight italic">
-            "We don't follow the trends. We spark them."
-          </p>
-        </div>
-      </section>
+  const managementIdeas = [
+    {
+      title: 'Understand what exists.',
+      detail: 'Bring clarity to current brand assets, market perception and internal alignment.',
+      icon: Eye,
+    },
+    {
+      title: 'Connect what matters.',
+      detail: 'Link strategic intent, creative expression and everyday brand decisions.',
+      icon: GitMerge,
+    },
+    {
+      title: 'Strengthen decisions.',
+      detail: 'Equip teams with clearer judgement for launches, communications and growth.',
+      icon: ShieldCheck,
+    },
+    {
+      title: 'Support ongoing management.',
+      detail: 'Build continuity so your brand stays consistent well beyond a single campaign.',
+      icon: RefreshCw,
+    },
+  ];
 
-      {/* What We Do */}
-      <section ref={servicesSectionRef} className="bg-white py-20 md:py-[120px] px-6 md:px-[120px] relative">
-        <div className="max-w-[1440px] mx-auto relative z-10">
-          <SectionHeader title="WHAT WE DO" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, i) => {
-              const parallaxOffset = sectionTop ? (scrollY - sectionTop + 400) * service.speed : 0;
-              return (
-                <div 
-                  key={i} 
-                  className="bg-[#F5F5F5] p-12 rounded-[16px] transition-all duration-300 group hover:bg-white border border-transparent hover:border-[#1AB69D]/10 shadow-sm hover:shadow-xl will-change-transform"
-                  style={{ transform: `translate3d(0, ${parallaxOffset}px, 0)` }}
+  const reservedPortfolioContainers = [
+    {
+      index: '01',
+      domain: 'Brand Development',
+      note: 'Reserved container for verified identity, positioning and brand system work.',
+      spanClass: 'lg:col-span-6',
+      aspectClass: 'aspect-[16/10]',
+    },
+    {
+      index: '02',
+      domain: 'Campaigns & Creative',
+      note: 'Reserved container for verified advertising and integrated communications artwork.',
+      spanClass: 'lg:col-span-3',
+      aspectClass: 'aspect-[4/3] lg:aspect-[4/4.15]',
+    },
+    {
+      index: '03',
+      domain: 'Brand Experiences & Activations',
+      note: 'Reserved container for verified launch and experiential activation photography.',
+      spanClass: 'lg:col-span-3',
+      aspectClass: 'aspect-[4/3] lg:aspect-[4/4.15]',
+    },
+  ];
+
+  const strengths = [
+    {
+      title: 'Market understanding',
+      description:
+        'Rooted in real context across Burundi and East Africa, combining local cultural nuance with disciplined research.',
+    },
+    {
+      title: 'Strategic perspective',
+      description:
+        'Focused on the commercial and brand priorities that shape long-term preference rather than short-lived noise.',
+    },
+    {
+      title: 'Creative strength',
+      description:
+        'Crafted ideas, visual systems and communications designed to earn attention and hold meaning over time.',
+    },
+    {
+      title: 'Continuous partnership',
+      description:
+        'Working alongside client teams as an invested partner—from strategic definition through active brand management.',
+    },
+  ];
+
+  return (
+    <div className="pt-[72px]">
+      {/* Section 01 — Hero */}
+      <section className="bg-[#102D38] text-white py-16 md:py-20 lg:py-24">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Copy Column — prioritized first on mobile */}
+            <div className="lg:col-span-6 order-1">
+              <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-5">
+                BRANDING &amp; BRAND MANAGEMENT. REIMAGINED.
+              </p>
+
+              <h1 className="font-heading text-[36px] sm:text-[44px] lg:text-[54px] font-bold leading-[1.08] tracking-[-0.025em] text-white text-balance mb-6">
+                Building stronger brands.{' '}
+                <span className="text-[#15B8A6]">Managing them better.</span>
+              </h1>
+
+              <p className="text-[#DCE5E8] text-base md:text-[18px] leading-[1.65] max-w-[54ch] mb-8">
+                We help organisations understand their markets, build compelling brands and manage
+                them effectively through research, strategy, creativity and innovative approaches to
+                brand management.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('expertise')}
+                  className="inline-flex items-center justify-center gap-2.5 bg-[#15B8A6] text-[#102D38] hover:bg-[#1FD0BC] font-semibold text-sm md:text-[15px] px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#15B8A6]"
                 >
-                  <div className="mb-6 text-[#1AB69D] transition-transform group-hover:scale-110 group-hover:rotate-3 inline-block">
-                    {service.icon}
+                  <span>Explore Our Expertise</span>
+                  <ArrowRight size={17} aria-hidden="true" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('selected-work')}
+                  className="inline-flex items-center justify-center bg-transparent text-white border border-white/30 hover:border-white hover:bg-white/10 font-semibold text-sm md:text-[15px] px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#15B8A6]"
+                >
+                  View Our Work
+                </button>
+              </div>
+            </div>
+
+            {/* Visual Column — placed below copy on mobile */}
+            <div className="lg:col-span-6 order-2">
+              <WorkplaceImage
+                src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_58_PM-4_ac2ade97.png"
+                alt="Team collaborating around a wooden table reviewing printed brand layouts and visual concepts"
+                className="rounded-2xl aspect-[4/3] lg:aspect-[5/4] shadow-xl ring-1 ring-white/10"
+                imgClassName="object-cover object-center"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 02 — The Aktivate Approach */}
+      <section className="bg-[#F4F3EE] py-20 lg:py-28">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <div className="lg:col-span-6">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+                The Aktivate Approach
+              </p>
+              <h2 className="font-heading text-[30px] md:text-[40px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance">
+                Great brands need more than great ideas.
+              </h2>
+              <div className="w-12 h-[2px] bg-[#15B8A6] my-6" aria-hidden="true" />
+              <div className="space-y-4 text-[#344249] text-base md:text-[17px] leading-[1.7] max-w-[54ch]">
+                <p>
+                  They need insight, clear direction, thoughtful management and creative experiences
+                  that connect with people.
+                </p>
+                <p>
+                  Aktivate brings these disciplines together to help organisations make better
+                  decisions and build brands that remain relevant.
+                </p>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <WorkplaceImage
+                src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_56_PM-3_473972e3.png"
+                alt="Two colleagues discussing brand strategy together at a laptop in a quiet workspace"
+                className="rounded-2xl aspect-[4/3] bg-[#E3E0D7]"
+                imgClassName="object-cover object-top"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 03 — Our Expertise */}
+      <section id="expertise" className="bg-white py-20 lg:py-28 scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-12 lg:mb-16">
+            <div className="lg:col-span-8">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+                Our Expertise
+              </p>
+              <h2 className="font-heading text-[30px] md:text-[42px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance max-w-[22ch]">
+                The expertise to build, manage and activate brands.
+              </h2>
+            </div>
+            <div className="lg:col-span-4 lg:flex lg:justify-end">
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] border-b border-[#102D38]/25 hover:border-[#0D7A6E] pb-1 transition-colors whitespace-nowrap shrink-0"
+              >
+                <span>View full capabilities</span>
+                <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Asymmetric 6-column Editorial Composition */}
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+            {/* Upper Row: Two broad strategic disciplines */}
+            {expertiseLead.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Link
+                  key={service.num}
+                  to="/services"
+                  className="md:col-span-3 group bg-[#F4F3EE] border border-[#1B252B]/10 rounded-2xl p-8 lg:p-10 flex flex-col justify-between transition-all duration-200 hover:border-[#15B8A6]/60 hover:-translate-y-0.5"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-8">
+                      <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
+                        {service.num}
+                      </span>
+                      <Icon
+                        size={20}
+                        strokeWidth={1.75}
+                        className="text-[#102D38]/75 group-hover:text-[#0D7A6E] transition-colors"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <h3 className="font-heading text-xl md:text-2xl font-bold text-[#1B252B] tracking-tight mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-[#344249] text-[15px] md:text-base leading-[1.65] max-w-[46ch]">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="text-[#0A0A0A] text-2xl font-bold mb-4">{service.id}. {service.title}</h3>
-                  <p className="text-[#1AB69D] text-lg font-medium mb-8">{service.tagline}</p>
-                  <ul className="space-y-3">
-                    {service.list.map((item, j) => (
-                      <li key={j} className="text-[#2D2D2D] flex items-center text-sm font-medium">
-                        <div className="w-1.5 h-1.5 bg-[#1AB69D] rounded-full mr-3"></div>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <div className="mt-8 pt-5 border-t border-[#1B252B]/10 flex items-center justify-between text-sm font-semibold text-[#102D38] group-hover:text-[#0D7A6E] transition-colors">
+                    <span>Explore discipline</span>
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </Link>
+              );
+            })}
+
+            {/* Lower Row: Featured Dark Brand Management Anchor + Two Execution Pillars */}
+            {expertiseCore.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Link
+                  key={service.num}
+                  to="/services"
+                  className={`md:col-span-2 group rounded-2xl p-7 lg:p-8 flex flex-col justify-between transition-all duration-200 hover:-translate-y-0.5 ${
+                    service.featured
+                      ? 'bg-[#102D38] text-white border border-[#102D38]'
+                      : 'bg-white text-[#1B252B] border border-[#1B252B]/12 hover:border-[#15B8A6]/60'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <span
+                        className={`font-heading text-sm font-bold tabular-nums ${
+                          service.featured ? 'text-[#15B8A6]' : 'text-[#0D7A6E]'
+                        }`}
+                      >
+                        {service.num}
+                      </span>
+                      <Icon
+                        size={19}
+                        strokeWidth={1.75}
+                        className={
+                          service.featured
+                            ? 'text-[#15B8A6]'
+                            : 'text-[#102D38]/75 group-hover:text-[#0D7A6E] transition-colors'
+                        }
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <h3
+                      className={`font-heading text-xl font-bold tracking-tight mb-3 ${
+                        service.featured ? 'text-white' : 'text-[#1B252B]'
+                      }`}
+                    >
+                      {service.title}
+                    </h3>
+                    <p
+                      className={`text-[15px] leading-[1.6] ${
+                        service.featured ? 'text-[#DCE5E8]' : 'text-[#344249]'
+                      }`}
+                    >
+                      {service.description}
+                    </p>
+                  </div>
+
+                  <div
+                    className={`mt-7 pt-4 border-t flex items-center justify-between text-sm font-semibold transition-colors ${
+                      service.featured
+                        ? 'border-white/15 text-[#15B8A6]'
+                        : 'border-[#1B252B]/10 text-[#102D38] group-hover:text-[#0D7A6E]'
+                    }`}
+                  >
+                    <span>Learn more</span>
+                    <ArrowRight
+                      size={15}
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </Link>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* HOW WE AKTIVATE */}
-      <section className="bg-[#F9F9F9] py-24 md:py-[120px] px-6 overflow-hidden">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-[#1AB69D] font-black text-xs uppercase tracking-[0.4em] mb-4 block">Proven Process</span>
-            <h2 className="text-[36px] md:text-[52px] font-[900] text-[#0A0A0A] leading-none mb-12 tracking-tight uppercase text-center">HOW WE AKTIVATE</h2>
-          </div>
-
-          <div className="relative mb-20 px-4">
-            <div className="absolute top-[22px] left-[5%] right-[5%] h-px bg-[#0A0A0A]/10" />
-            <div 
-              className="absolute top-[22px] left-[5%] h-px bg-[#1AB69D] transition-all duration-700 ease-in-out" 
-              style={{ width: `${(activeStep / (steps.length - 1)) * 90}%` }}
-            />
-            <div className="relative flex justify-between items-start">
-              {steps.map((step, i) => {
-                const isActive = activeStep === i;
-                const isPast = activeStep > i;
-                return (
-                  <button key={step.id} onClick={() => setActiveStep(i)} className="flex flex-col items-center group relative z-10 w-12">
-                    <div className={`w-11 h-11 rounded-full border-2 flex items-center justify-center transition-all duration-500 mb-4 bg-white ${isActive ? 'border-[#1AB69D] scale-125 shadow-xl ring-4 ring-[#1AB69D]/10' : isPast ? 'border-[#1AB69D] bg-[#1AB69D]' : 'border-[#E5E5E5]'}`}>
-                      {isPast ? <Check size={20} className="text-white" /> : <span className={`text-xs font-black ${isActive ? 'text-[#1AB69D]' : 'text-[#0A0A0A]/40'}`}>{step.id}</span>}
-                    </div>
-                  </button>
-                );
-              })}
+      {/* Section 04 — Brand Management & Advisory */}
+      <section id="brand-management" className="bg-[#EAF5F3] py-20 lg:py-28 scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Workshop Photography */}
+            <div className="lg:col-span-6">
+              <WorkplaceImage
+                src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_55_PM-2_cd046b1b.png"
+                alt="Strategy workshop session around a table with a presenter guiding a discussion at a whiteboard"
+                className="rounded-2xl aspect-[4/3] bg-[#D6E9E5] shadow-sm"
+                imgClassName="object-cover object-center"
+              />
             </div>
-          </div>
 
-          <div className="bg-white rounded-[32px] shadow-2xl overflow-hidden border border-[#0A0A0A]/5 transition-all duration-500">
-            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[400px]">
-              <div className="lg:col-span-5 relative bg-[#0A0A0A] overflow-hidden">
-                <img 
-                  src={`https://images.unsplash.com/photo-${['1517245386807-bb43f82c33c4', '1460925895917-afdab827c52f', '1552664730-d307ca884978', '1522202176988-66273c2fd55f', '1531482615713-2afd69097998', '1454165833767-02750849147d'][activeStep]}?auto=format&fit=crop&q=80&w=800`}
-                  alt={steps[activeStep].name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity scale-110 hover:scale-100 transition-transform duration-1000"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/80 to-transparent" />
-                <div className="absolute bottom-10 left-10 text-white">
-                  <h3 className="text-4xl font-black tracking-tighter italic uppercase">{steps[activeStep].name}</h3>
-                </div>
+            {/* Advisory Narrative */}
+            <div className="lg:col-span-6">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+                Brand Management &amp; Advisory
+              </p>
+              <h2 className="font-heading text-[30px] md:text-[38px] font-bold text-[#102D38] leading-[1.15] tracking-[-0.02em] text-balance mb-5">
+                Your brand is always evolving. The way you manage it should too.
+              </h2>
+              <p className="text-[#273840] text-base md:text-[17px] leading-[1.65] mb-8 max-w-[56ch]">
+                We help organisations connect brand strategy, market knowledge, management decisions
+                and actions into a more effective and continuous approach to brand management.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 mb-9">
+                {managementIdeas.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="border-t border-[#102D38]/15 pt-4">
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <Icon
+                          size={17}
+                          strokeWidth={1.85}
+                          className="text-[#0D7A6E] shrink-0"
+                          aria-hidden="true"
+                        />
+                        <h3 className="font-heading text-[15px] font-bold text-[#102D38]">
+                          {item.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm text-[#344249] leading-[1.55]">{item.detail}</p>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="lg:col-span-7 p-10 md:p-16 flex flex-col justify-center">
-                <p className="text-[#0A0A0A] text-2xl md:text-3xl font-bold leading-tight mb-6">{steps[activeStep].desc}</p>
-                <p className="text-[#2D2D2D] text-[16px] md:text-lg leading-relaxed opacity-70 italic mb-10">"{steps[activeStep].detail}"</p>
-                <div className="flex items-center space-x-6">
-                  <button onClick={prevStep} className="p-4 rounded-full border border-[#0A0A0A]/10 text-[#0A0A0A]/40 hover:text-[#1AB69D] transition-all"><ChevronLeft size={24} /></button>
-                  <button onClick={nextStep} className="p-4 rounded-full bg-[#0A0A0A] text-white hover:bg-[#1AB69D] transition-all"><ArrowRight size={24} /></button>
-                </div>
-              </div>
+
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center gap-2.5 bg-[#102D38] text-white hover:bg-[#1B252B] font-semibold text-sm md:text-[15px] px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D38]"
+              >
+                <span>Explore Brand Management</span>
+                <ArrowRight size={17} aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trusted By */}
-      <section className="bg-[#F5F5F5] py-20 overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-6 mb-12"><SectionHeader title="TRUSTED BY" /></div>
-        <div className="relative">
-          <div className="flex animate-marquee space-x-8 w-fit px-4">
-            {scrollingClients.map((client, i) => (
-              <div key={i} className="flex-shrink-0 w-[200px] md:w-[250px] bg-white h-[100px] md:h-[120px] rounded-[16px] flex items-center justify-center p-8 grayscale hover:grayscale-0 transition-all duration-500 shadow-sm">
-                <span className="font-black text-xl md:text-2xl opacity-40 hover:opacity-100 transition-opacity" style={{ color: client.color }}>{client.name}</span>
-              </div>
+      {/* Section 05 — Selected Work */}
+      <section id="selected-work" className="bg-white py-20 lg:py-28 scroll-mt-20">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12 lg:mb-14">
+            <div className="lg:col-span-6">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+                Selected Work
+              </p>
+              <h2 className="font-heading text-[30px] md:text-[42px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance">
+                Ideas, insights and creativity in action.
+              </h2>
+            </div>
+            <div className="lg:col-span-6 flex flex-col lg:items-end justify-between gap-4">
+              <p className="text-[#344249] text-base md:text-[17px] leading-[1.65] max-w-[52ch] lg:text-right">
+                From brand development to campaigns and customer experiences, our work reflects the
+                different challenges we help organisations address.
+              </p>
+              <Link
+                to="/work"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] border-b border-[#102D38]/25 hover:border-[#0D7A6E] pb-1 transition-colors self-start lg:self-end whitespace-nowrap shrink-0"
+              >
+                <span>Explore Our Work</span>
+                <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Three Reserved Portfolio Containers (no invented clients or metrics) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {reservedPortfolioContainers.map((slot) => (
+              <Link
+                key={slot.index}
+                to="/work"
+                className={`${slot.spanClass} group block rounded-2xl bg-[#F4F3EE] border border-[#1B252B]/12 overflow-hidden transition-all duration-200 hover:border-[#15B8A6]/70`}
+              >
+                <div
+                  className={`${slot.aspectClass} relative p-7 md:p-8 flex flex-col justify-between bg-[linear-gradient(to_right,rgba(16,45,56,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,45,56,0.04)_1px,transparent_1px)] bg-[size:32px_32px]`}
+                >
+                  <div className="flex items-center justify-between text-xs text-[#344249]">
+                    <span className="font-heading font-bold text-[#0D7A6E] tabular-nums">
+                      {slot.index} / Portfolio Slot
+                    </span>
+                    <span className="text-[#344249]/80">Reserved</span>
+                  </div>
+
+                  <div className="mt-auto pt-8">
+                    <h3 className="font-heading text-xl md:text-2xl font-bold text-[#1B252B] tracking-tight mb-2 group-hover:text-[#0D7A6E] transition-colors">
+                      {slot.domain}
+                    </h3>
+                    <p className="text-sm text-[#344249] leading-[1.55] max-w-[38ch] mb-4">
+                      {slot.note}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#102D38] group-hover:text-[#0D7A6E] transition-colors">
+                      <span>View category</span>
+                      <ArrowRight
+                        size={15}
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 06 — Why Aktivate */}
+      <section className="bg-[#F4F3EE] py-20 lg:py-28">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <div className="lg:col-span-7">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+                Why Aktivate
+              </p>
+              <h2 className="font-heading text-[30px] md:text-[42px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance mb-5">
+                Big-picture thinking. Hands-on partnership.
+              </h2>
+              <div className="space-y-3 text-[#344249] text-base md:text-[17px] leading-[1.65] max-w-[58ch] mb-10">
+                <p>
+                  We bring together market understanding, strategic judgement, creative expertise
+                  and a collaborative way of working.
+                </p>
+                <p>We work closely with our clients to turn priorities into meaningful action.</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-7">
+                {strengths.map((item) => (
+                  <div key={item.title} className="border-t border-[#1B252B]/15 pt-4">
+                    <h3 className="font-heading text-lg font-bold text-[#1B252B] mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm md:text-[15px] text-[#344249] leading-[1.6]">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <WorkplaceImage
+                src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_53_PM-1_2348b281.png"
+                alt="Team members in natural conversation around a conference table during a planning session"
+                className="rounded-2xl aspect-[4/3] lg:aspect-[4/4.5] bg-[#E3E0D7]"
+                imgClassName="object-cover object-center"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 07 — Contact */}
+      <section className="bg-[#102D38] text-white py-20 lg:py-28">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+            <div className="lg:col-span-8">
+              <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
+                Let&apos;s build something stronger.
+              </p>
+              <h2 className="font-heading text-[34px] md:text-[48px] font-bold leading-[1.1] tracking-[-0.025em] text-white text-balance mb-5">
+                Where could your brand go next?
+              </h2>
+              <p className="text-[#DCE5E8] text-base md:text-[18px] leading-[1.65] max-w-[54ch] mb-8">
+                Whether you&apos;re developing a brand, improving how it is managed or planning your
+                next campaign, we&apos;d welcome the conversation.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2.5 bg-[#15B8A6] text-[#102D38] hover:bg-[#1FD0BC] font-semibold text-sm md:text-[15px] px-7 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#15B8A6]"
+              >
+                <span>Start a Conversation</span>
+                <ArrowRight size={17} aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="lg:col-span-4 lg:border-l lg:border-white/15 lg:pl-10 pt-4 lg:pt-0">
+              <p className="font-heading text-3xl md:text-4xl font-bold leading-[1.15] tracking-tight text-white">
+                Imagine.
+                <br />
+                Dare.
+                <br />
+                <span className="text-[#15B8A6]">Create.</span>
+              </p>
+            </div>
           </div>
         </div>
       </section>
