@@ -106,23 +106,23 @@ const Home: React.FC = () => {
 
   const managementIdeas = [
     {
-      title: 'Understand what exists.',
-      detail: 'Bring clarity to current brand assets, market perception and internal alignment.',
+      title: 'Protect brand consistency.',
+      detail: 'Prevent fragmented, ad-hoc communication across campaigns, channels and teams.',
       icon: Eye,
     },
     {
       title: 'Connect what matters.',
-      detail: 'Link strategic intent, creative expression and everyday brand decisions.',
+      detail: 'Link brand strategy, market insight and everyday commercial execution.',
       icon: GitMerge,
     },
     {
       title: 'Strengthen decisions.',
-      detail: 'Equip teams with clearer judgement for launches, communications and growth.',
+      detail: 'Equip leadership and marketing teams with clear governance for launches and growth.',
       icon: ShieldCheck,
     },
     {
-      title: 'Support ongoing management.',
-      detail: 'Build continuity so your brand stays consistent well beyond a single campaign.',
+      title: 'Build lasting capability.',
+      detail: 'Establish continuous brand-management routines that sustain value beyond one campaign.',
       icon: RefreshCw,
     },
   ];
@@ -131,13 +131,15 @@ const Home: React.FC = () => {
     {
       client: 'BGF Bank',
       category: 'Campaigns & Communications',
-      summary: 'Retail banking, branch communication and digital product campaign artwork.',
+      summary:
+        'Social and digital communication graphics highlighting branch access, Horizon cards, mobile banking and MoneyGram services.',
       image: '/assets/recovery/campaigns/campaign_bgf_bank_montage.png',
     },
     {
       client: "Vital'o",
       category: 'Experiences & Activations',
-      summary: 'Sports sponsorship, product communication and hydration campaign artwork.',
+      summary:
+        'Tournament sponsorship visuals for basketball and beach volleyball alongside still and sparkling water social graphics.',
       image: '/assets/recovery/campaigns/campaign_vitalo_montage.png',
     },
   ];
@@ -412,8 +414,10 @@ const Home: React.FC = () => {
                 Your brand is always evolving. The way you manage it should too.
               </h2>
               <p className="text-[#273840] text-base md:text-[17px] leading-[1.65] mb-8 max-w-[56ch]">
-                We help organisations connect brand strategy, market knowledge, management decisions
-                and actions into a more effective and continuous approach to brand management.
+                Strong brands lose ground when strategy, day-to-day execution and market insight
+                drift apart. We partner with leadership teams to build continuous brand management,
+                connected decision-making and stronger organisational practices that protect brand
+                value over time.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-8">

@@ -7,22 +7,22 @@ const About: React.FC = () => {
     {
       num: '01',
       title: 'How we approach client challenges',
-      body: 'We begin by listening and examining the real commercial and market context. Rather than jumping straight to visual outputs, we ground strategy and creative decisions in clear customer and business insight.',
+      body: 'Every brief begins with honest listening and clear commercial context. Before proposing creative work, we look closely at the market, the customer and what the brand actually needs to solve.',
     },
     {
       num: '02',
       title: 'Our collaborative working culture',
-      body: 'Our studio operates through open conversation, shared tables and direct dialogue with client teams. We value clarity, practical thinking and approachable professionalism over agency jargon.',
+      body: 'We do our best work around a shared table—sketching, debating ideas openly and working directly with client teams in a relaxed, straightforward way without unnecessary agency theatre.',
     },
     {
       num: '03',
       title: 'Strategic and creative expertise together',
-      body: 'Research, brand positioning, Brand Management Systems, creative development and experiential activations sit under one roof so strategy and execution reinforce one another.',
+      body: 'Research, brand positioning, brand management, creative craft and activations sit under one roof so strategic clarity informs the creative work from day one.',
     },
     {
       num: '04',
       title: 'Commitment to ongoing partnerships',
-      body: 'Strong brands are shaped through consistency over time. We stay engaged with clients beyond individual campaigns to support governance, adaptation and steady brand growth.',
+      body: 'A brand is shaped long after launch day. We stay invested alongside the teams we serve—supporting everyday brand decisions, consistency and growth across changing market conditions.',
     },
   ];
 
@@ -46,7 +46,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Core Story & Who We Are */}
-      <section className="bg-[#F4F3EE] py-16 lg:py-24">
+      <section className="bg-[#F4F3EE] py-16 lg:py-22">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6">
@@ -72,8 +72,8 @@ const About: React.FC = () => {
             <div className="lg:col-span-6">
               <div className="rounded-2xl overflow-hidden bg-[#E3E0D7] aspect-[4/3]">
                 <img
-                  src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_58_PM-4_ac2ade97.png"
-                  alt="Colleagues collaborating around a wooden table reviewing visual brand layouts"
+                  src="/assets/recovery/workplace/workplace_aktivate_1.jpg"
+                  alt="Aktivate team gathered around a studio table reviewing creative work together"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center"
                 />
@@ -95,6 +95,10 @@ const About: React.FC = () => {
                 <h2 className="font-heading text-[28px] md:text-[36px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance">
                   Approachable people. Disciplined brand thinking.
                 </h2>
+                <p className="text-[#344249] text-base leading-[1.68] mt-4">
+                  We care deeply about the craft behind every identity, campaign and brand system—and
+                  we keep the working relationship practical, human and collaborative.
+                </p>
               </div>
 
               <div className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
@@ -106,33 +110,21 @@ const About: React.FC = () => {
                   className="w-full h-full object-cover object-top"
                 />
               </div>
-
-              <div className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[16/10]">
-                <img
-                  src="/assets/recovery/workplace/workplace_aktivate_1.jpg"
-                  alt="Studio team gathered around a table during a creative review session"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
             </div>
 
-            <div className="lg:col-span-7 grid grid-cols-1 gap-6 lg:pt-4">
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pt-2">
               {principles.map((item) => (
                 <div
                   key={item.num}
-                  className="bg-[#F4F3EE] border border-[#1B252B]/10 rounded-2xl p-7 md:p-8"
+                  className="bg-[#F4F3EE] border border-[#1B252B]/10 rounded-2xl p-7"
                 >
                   <span className="block font-heading text-xs font-bold text-[#0D7A6E] tabular-nums mb-2">
                     {item.num}
                   </span>
-                  <h3 className="font-heading text-xl font-bold text-[#1B252B] mb-2.5">
+                  <h3 className="font-heading text-lg font-bold text-[#1B252B] mb-2.5">
                     {item.title}
                   </h3>
-                  <p className="text-[#344249] text-base leading-[1.68] max-w-[58ch]">
-                    {item.body}
-                  </p>
+                  <p className="text-[#344249] text-[15px] leading-[1.65]">{item.body}</p>
                 </div>
               ))}
             </div>
@@ -152,9 +144,9 @@ const About: React.FC = () => {
                 We Are Aktivators.
               </h2>
               <p className="text-[#273840] text-base md:text-[17px] leading-[1.68] max-w-[56ch]">
-                It is how we describe our energy when solving brand challenges—curious enough to
-                question assumptions, bold enough to explore better directions and committed to
-                turning ideas into work that holds up in the real world.
+                It captures the curiosity, energy and care our team brings to every brand—asking
+                sharper questions, exploring ideas with imagination and staying hands-on until the
+                work makes a real difference for the people it serves.
               </p>
             </div>
 

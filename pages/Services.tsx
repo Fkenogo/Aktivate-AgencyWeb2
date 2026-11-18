@@ -222,14 +222,15 @@ const Services: React.FC = () => {
                 Brand Management &amp; Advisory
               </h2>
               <p className="text-[#273840] text-base md:text-[17px] leading-[1.68] mb-4">
-                A strong brand cannot rely on a one-off launch or isolated creative guidelines.
-                Aktivate works directly with leadership and marketing teams to embed continuous,
-                practical brand management across the organisation.
+                A strong brand loses value when strategy, day-to-day execution and market feedback
+                drift apart. Aktivate works directly with leadership and marketing teams to turn
+                brand management into a continuous, connected discipline—protecting brand equity
+                and preventing fragmented, ad-hoc communication.
               </p>
               <p className="text-[#344249] text-base leading-[1.68]">
-                From diagnosing existing brand maturity to designing governance structures and
-                supporting day-to-day brand decisions, this established practice keeps strategy,
-                teams and customer experience aligned over time.
+                From diagnosing current brand practices to establishing clear governance and
+                practical internal routines, this established service helps organisations make
+                sharper brand decisions and build stronger capability over time.
               </p>
             </div>
 

@@ -15,7 +15,13 @@ interface WorkItem {
   category: Exclude<WorkCategory, 'All'>;
   scope: string;
   description: string;
-  image: string;
+  /**
+   * PORTFOLIO ARTWORK REPLACEMENT GUIDE:
+   * Drop final high-resolution artwork (>= 1200px wide) into /public/assets/recovery/portfolio/
+   * and set `image: '/assets/recovery/portfolio/<filename>'` on the matching entry below.
+   * When `image` is omitted, the card renders an intentional editorial plate automatically.
+   */
+  image?: string;
   featured?: boolean;
 }
 
@@ -36,9 +42,9 @@ const Work: React.FC = () => {
       id: 'primus',
       client: 'Primus',
       category: 'Campaigns & Communications',
-      scope: 'Digital Campaign & Regional Activation Creatives',
+      scope: 'Social Media & Event Promotional Visuals',
       description:
-        'Multi-format social content and live-music event communication developed for Primus and its Primus Black variant, preserving the brand’s original visual language.',
+        'Social graphics and live-music event promotional posters featuring Primus and its Primus Black variant, preserving the brand’s original visual identity.',
       image: '/assets/recovery/campaigns/campaign_primus_montage.png',
       featured: true,
     },
@@ -46,46 +52,46 @@ const Work: React.FC = () => {
       id: 'bgf-bank',
       client: 'BGF Bank',
       category: 'Campaigns & Communications',
-      scope: 'Retail Banking & Digital Service Communications',
+      scope: 'Digital & Retail Service Graphics',
       description:
-        'Customer-facing banking communications highlighting branch network access, payment cards, mobile services and remittance partnerships.',
+        'Social and digital communication artwork highlighting branch network access, Horizon cards, mobile banking and MoneyGram services.',
       image: '/assets/recovery/campaigns/campaign_bgf_bank_montage.png',
     },
     {
       id: 'vitalo',
       client: "Vital'o",
       category: 'Experiences & Activations',
-      scope: 'Sports Sponsorship & Brand Communication',
+      scope: 'Sports Sponsorship & Product Visuals',
       description:
-        'Sponsorship artwork for national basketball and international beach volleyball tournaments alongside core product hydration messaging.',
+        'Tournament sponsorship graphics for basketball and beach volleyball alongside still and sparkling water social posts.',
       image: '/assets/recovery/campaigns/campaign_vitalo_montage.png',
     },
     {
       id: 'kcb-bank',
       client: 'KCB Bank Burundi',
       category: 'Campaigns & Communications',
-      scope: 'Contact Centre & Outdoor Awareness Campaign',
+      scope: 'Poster & Outdoor Display Visuals',
       description:
-        'Bilingual customer-service awareness visuals created for print and outdoor display formats.',
-      image: '/assets/recovery/portfolio/kcb_contact_centre.png',
+        'Bilingual Contact Centre awareness posters and outdoor billboard display visuals.',
+      // Replacement target: '/assets/recovery/portfolio/kcb_contact_centre.png' (>= 1200px)
     },
     {
       id: 'nyongera',
       client: 'Nyongera',
       category: 'Campaigns & Communications',
-      scope: 'Product Launch & Visual Communication',
+      scope: 'Product Visuals & Launch Poster',
       description:
-        'Bottle presentation and poster communication artwork introducing the beverage to local consumers.',
-      image: '/assets/recovery/portfolio/primus_nyongera.png',
+        'Bottle and glass product presentation alongside promotional launch poster artwork.',
+      // Replacement target: '/assets/recovery/portfolio/primus_nyongera.png' (>= 1200px)
     },
     {
       id: 'akeza-sports',
       client: 'Akeza Sports',
       category: 'Branding & Identity',
-      scope: 'Brand Identity, Kit & Promotional Collateral',
+      scope: 'Brand Identity & Promotional Visuals',
       description:
-        'Visual identity system, branded sportswear applications and commercial advertising templates.',
-      image: '/assets/recovery/portfolio/akeza_sports_identity.png',
+        'Brand mark, sportswear kit applications and advertising space promotional creatives.',
+      // Replacement target: '/assets/recovery/portfolio/akeza_sports_identity.png' (>= 1200px)
     },
     {
       id: 'shiriki',
@@ -93,26 +99,26 @@ const Work: React.FC = () => {
       category: 'Branding & Identity',
       scope: 'Brand Identity, Stationery & Apparel',
       description:
-        'Logo system, corporate stationery suite and branded apparel created for the Shiriki platform.',
-      image: '/assets/recovery/portfolio/shiriki_identity.png',
+        'Logo lockup, corporate stationery systems and branded apparel applications.',
+      // Replacement target: '/assets/recovery/portfolio/shiriki_identity.png' (>= 1200px)
     },
     {
       id: 'sosa',
       client: 'SOSA · Truefoods Africa',
       category: 'Branding & Identity',
-      scope: 'Brand Identity, Packaging & Branded Apparel',
+      scope: 'Logotype, Packaging & Branded Apparel',
       description:
-        'Logotype, packaging graphics for retail maize flour sacks and promotional merchandise.',
-      image: '/assets/recovery/portfolio/sosa_packaging.png',
+        'Truefoods Africa emblem, SOSA wordmark, maize flour sack packaging and promotional apparel.',
+      // Replacement target: '/assets/recovery/portfolio/sosa_packaging.png' (>= 1200px)
     },
     {
       id: 'ilo',
       client: 'International Labour Organization (ILO)',
       category: 'Experiences & Activations',
-      scope: 'Event Branding & Institutional Signage',
+      scope: 'Event Signage & Delegate Credentials',
       description:
-        'Workshop signage, event banners and delegate credential visuals produced for national validation sessions.',
-      image: '/assets/recovery/portfolio/ilo_campaign_visuals.png',
+        'Validation workshop signage and delegate credential visuals.',
+      // Replacement target: '/assets/recovery/portfolio/ilo_campaign_visuals.png' (>= 1200px)
     },
   ];
 
@@ -187,35 +193,71 @@ const Work: React.FC = () => {
       <section className="bg-[#F4F3EE] py-14 lg:py-20 min-h-[520px]">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           {activeFilter === 'Research & Brand Management' ? (
-            <div className="bg-white border border-[#1B252B]/12 rounded-2xl p-8 md:p-12 max-w-[880px]">
+            <div className="bg-white border border-[#1B252B]/12 rounded-2xl p-8 md:p-12 max-w-[960px]">
               <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 Research &amp; Brand Management
               </p>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#1B252B] mb-4">
-                Confidential strategic and brand-management mandates
+                Insight-led brand strategy and continuous brand governance
               </h2>
-              <p className="text-[#344249] text-base leading-[1.7] mb-6">
-                Market intelligence studies, brand-health tracking, Brand Management System
-                architectures and ongoing advisory engagements are developed privately with client
-                leadership teams. Approved anonymised summaries and visual case highlights will be
-                published in this reserved space once cleared for public display.
+              <p className="text-[#344249] text-base leading-[1.7] mb-8 max-w-[68ch]">
+                Research and Brand Management sit at the core of Aktivate&apos;s established
+                practice. Because these engagements involve sensitive commercial data, internal
+                governance structures and proprietary leadership roadmaps, selected case
+                documentation is shared directly during client consultations rather than published
+                as open campaign boards.
               </p>
-              <div className="border border-dashed border-[#102D38]/25 rounded-xl bg-[#F4F3EE] p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#0D7A6E] mb-1">
-                    Reserved Portfolio Slot
-                  </span>
-                  <span className="text-sm text-[#344249]">
-                    Awaiting Founder-cleared Research &amp; Brand Management case documentation.
-                  </span>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                {[
+                  {
+                    title: 'Market Intelligence & Brand Health',
+                    detail:
+                      'Primary consumer research, brand-equity diagnostics and competitive benchmarking that ground commercial decisions in evidence.',
+                  },
+                  {
+                    title: 'Brand Management Systems',
+                    detail:
+                      'Structured operating standards, asset governance and team workflows that keep everyday brand execution aligned.',
+                  },
+                  {
+                    title: 'Ongoing Executive Advisory',
+                    detail:
+                      'Continuous counsel across product launches, portfolio architecture, communication reviews and internal capability building.',
+                  },
+                ].map((pillar) => (
+                  <div
+                    key={pillar.title}
+                    className="rounded-xl bg-[#F4F3EE] border border-[#1B252B]/10 p-5"
+                  >
+                    <h3 className="font-heading text-[15px] font-bold text-[#102D38] mb-2">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-sm text-[#344249] leading-[1.6]">{pillar.detail}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="border-t border-[#1B252B]/10 pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <p className="text-sm text-[#344249]">
+                  Selected credentials and sample deliverables are available on request.
+                </p>
+                <div className="flex flex-wrap items-center gap-4 shrink-0">
+                  <Link
+                    to="/services"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] whitespace-nowrap"
+                  >
+                    <span>Explore full capability</span>
+                    <ArrowRight size={15} aria-hidden="true" />
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-2 bg-[#102D38] text-white hover:bg-[#1B252B] font-semibold text-sm px-5 py-2.5 rounded-lg whitespace-nowrap transition-colors"
+                  >
+                    <span>Request credentials</span>
+                    <ArrowRight size={15} aria-hidden="true" />
+                  </Link>
                 </div>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] whitespace-nowrap shrink-0"
-                >
-                  <span>View advisory scope</span>
-                  <ArrowRight size={15} aria-hidden="true" />
-                </Link>
               </div>
             </div>
           ) : (
@@ -273,29 +315,62 @@ const Work: React.FC = () => {
 
               {/* Expressive Varied Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {gridItems.map((item) => (
+                {gridItems.map((item, idx) => (
                   <article
                     key={item.id}
                     className="bg-white border border-[#1B252B]/10 rounded-2xl overflow-hidden flex flex-col"
                   >
-                    <button
-                      type="button"
-                      onClick={() => setSelectedItem(item)}
-                      className="relative group bg-[#ECEAE3] aspect-[16/10] overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#15B8A6]"
-                      aria-label={`View full artwork for ${item.client}`}
-                    >
-                      <img
-                        src={item.image}
-                        alt={`${item.client} — ${item.scope}`}
-                        referrerPolicy="no-referrer"
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                      />
-                      <span className="absolute bottom-3.5 right-3.5 inline-flex items-center gap-1.5 bg-[#102D38]/90 text-white text-xs font-medium px-3 py-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Maximize2 size={13} aria-hidden="true" />
-                        <span>Inspect</span>
-                      </span>
-                    </button>
+                    {item.image ? (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedItem(item)}
+                        className="relative group bg-[#ECEAE3] aspect-[16/10] overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#15B8A6]"
+                        aria-label={`View full artwork for ${item.client}`}
+                      >
+                        <img
+                          src={item.image}
+                          alt={`${item.client} — ${item.scope}`}
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        />
+                        <span className="absolute bottom-3.5 right-3.5 inline-flex items-center gap-1.5 bg-[#102D38]/90 text-white text-xs font-medium px-3 py-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Maximize2 size={13} aria-hidden="true" />
+                          <span>Inspect</span>
+                        </span>
+                      </button>
+                    ) : (
+                      <div
+                        className="aspect-[16/10] bg-[#102D38] border-b border-[#102D38]/10 p-7 flex flex-col justify-between text-white"
+                        aria-label={`${item.client} editorial showcase plate`}
+                      >
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#15B8A6]">
+                            Selected Assignment
+                          </span>
+                          <span className="font-heading text-xs font-bold text-white/45 tabular-nums">
+                            {String(idx + (featuredItem ? 2 : 1)).padStart(2, '0')}
+                          </span>
+                        </div>
+
+                        <div className="my-auto py-3">
+                          <div className="w-8 h-[2px] bg-[#15B8A6] mb-3" aria-hidden="true" />
+                          <p className="font-heading text-xl md:text-[22px] font-semibold text-white/95 leading-[1.3] max-w-[26ch]">
+                            Full creative presentation curated in studio portfolio deck.
+                          </p>
+                        </div>
+
+                        <div className="pt-3 border-t border-white/12 flex items-center justify-between text-xs text-white/70">
+                          <span>Aktivate Creative Studio</span>
+                          <Link
+                            to="/contact"
+                            className="font-medium text-[#15B8A6] hover:underline"
+                          >
+                            Request visuals
+                          </Link>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="p-7 flex flex-col justify-between flex-grow">
                       <div>
@@ -333,12 +408,12 @@ const Work: React.FC = () => {
                 Research &amp; Brand Management
               </p>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#1B252B] mb-3">
-                Strategic and advisory engagements
+                Insight, governance and continuous brand advisory
               </h2>
-              <p className="text-[#344249] text-base leading-[1.65] max-w-[58ch]">
-                Alongside public-facing campaigns and identity systems, Aktivate conducts market
-                intelligence studies and implements Brand Management Systems with client leadership
-                teams. Public case summaries are published only with client clearance.
+              <p className="text-[#344249] text-base leading-[1.65] max-w-[60ch]">
+                Alongside public-facing campaigns and identity systems, Aktivate delivers
+                confidential market intelligence studies, Brand Management System architectures and
+                ongoing governance advisory for leadership teams across sectors.
               </p>
             </div>
             <div className="lg:col-span-5 lg:flex lg:justify-end">
