@@ -46,11 +46,13 @@ const Navbar: React.FC = () => {
           aria-label="Aktivate Home"
         >
           <img
-            src="/assets/aistudio/aktivate_logo-01_232a8292.png"
+            src={
+              isLightHeader
+                ? '/assets/aistudio/aktivate_logo_transparent.png'
+                : '/assets/aistudio/aktivate_logo_white.png'
+            }
             alt="Aktivate"
-            className={`h-7 md:h-8 w-auto object-contain transition-all duration-200 ${
-              isLightHeader ? '' : 'brightness-0 invert'
-            }`}
+            className="h-6 md:h-7 w-auto object-contain"
           />
         </Link>
 
@@ -75,7 +77,7 @@ const Navbar: React.FC = () => {
                 {link.name}
                 <span
                   className={`absolute bottom-0 left-0 right-0 h-[2px] bg-[#15B8A6] transition-transform duration-200 origin-left ${
-                    isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    isActive ? 'scale-x-100' : 'scale-x-0'
                   }`}
                 />
               </Link>
@@ -120,9 +122,9 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)} aria-label="Aktivate Home">
             <img
-              src="/assets/aistudio/aktivate_logo-01_232a8292.png"
+              src="/assets/aistudio/aktivate_logo_white.png"
               alt="Aktivate"
-              className="h-7 w-auto object-contain brightness-0 invert"
+              className="h-6 w-auto object-contain"
             />
           </Link>
           <button

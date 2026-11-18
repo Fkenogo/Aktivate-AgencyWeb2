@@ -1,257 +1,284 @@
-
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Instagram, Facebook, Linkedin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Info, ArrowUpRight } from 'lucide-react';
 
 const Contact: React.FC = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    company: '',
-    message: ''
+    organisation: '',
+    areaOfInterest: '',
+    message: '',
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Please tell us what you need';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData({ ...formData, [field]: value });
-    // Clear error for this field as user types
-    if (errors[field]) {
-      setErrors({ ...errors, [field]: '' });
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validate()) {
-      setIsSubmitting(true);
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-      }, 1500);
-    }
-  };
+  const serviceAreas = [
+    'Brand Intelligence & Research',
+    'Brand Strategy & Development',
+    'Brand Management & Advisory',
+    'Creative & Communications',
+    'Brand Experiences & Activations',
+    'General Enquiry',
+  ];
 
   return (
-    <div className="pt-20">
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-[#1AB69D] to-[#0A0A0A] py-24 md:py-40 px-6 text-center text-white">
-        <h1 className="text-[40px] md:text-[56px] font-[800] leading-tight mb-8">READY TO DISRUPT THE GAME?</h1>
-        <p className="text-[18px] md:text-[24px] max-w-[800px] mx-auto text-[#F5F5F5] leading-relaxed">
-          Don't just exist. Dominate. <br />
-          Let's build something unforgettable.
-        </p>
+    <div className="pt-[72px]">
+      {/* Opening Header */}
+      <section className="bg-[#102D38] text-white py-16 md:py-24">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="max-w-[72ch]">
+            <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
+              Contact
+            </p>
+            <h1 className="font-heading text-[34px] sm:text-[42px] lg:text-[50px] font-bold leading-[1.08] tracking-[-0.025em] text-white text-balance mb-5">
+              Let&apos;s talk about your brand.
+            </h1>
+            <p className="text-[#DCE5E8] text-base md:text-[18px] leading-[1.65] max-w-[58ch]">
+              Whether you&apos;re building a new brand, reviewing your strategy, improving how your
+              brand is managed or planning your next campaign, we&apos;d welcome the conversation.
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* Form & Info Section */}
-      <section className="bg-white py-20 md:py-[120px] px-6 md:px-[120px]">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-          
-          {/* Contact Form */}
-          <div className="bg-white p-8 md:p-12 rounded-[16px] shadow-2xl relative overflow-hidden">
-            {isSubmitted ? (
-              <div className="text-center py-20 animate-fade-in">
-                <div className="flex justify-center mb-6">
-                  <CheckCircle2 size={80} className="text-[#1AB69D]" />
-                </div>
-                <h3 className="text-3xl font-bold text-[#0A0A0A] mb-4">GET AKTIVATED</h3>
-                <p className="text-xl text-[#2D2D2D]">Thanks for reaching out! We'll get back to you within 24 hours.</p>
-                <button 
-                  onClick={() => setIsSubmitted(false)}
-                  className="mt-8 text-[#1AB69D] font-bold hover:underline"
-                >
-                  Send another message
-                </button>
+      {/* Form & Verified Contact Details */}
+      <section className="bg-[#F4F3EE] py-16 lg:py-24">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            {/* Enquiry Form Prototype */}
+            <div className="lg:col-span-7 bg-white border border-[#1B252B]/10 rounded-2xl p-7 md:p-10">
+              <div className="mb-7">
+                <h2 className="font-heading text-2xl font-bold text-[#1B252B] mb-2">
+                  Send an enquiry
+                </h2>
+                <p className="text-sm text-[#344249] leading-[1.6]">
+                  Share a brief outline of your brand challenge, timeline or area of interest.
+                </p>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                <h3 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] mb-12 text-center">GET AKTIVATED</h3>
-                
-                <div className="space-y-1">
-                  <label className="text-xs font-black text-[#0A0A0A] uppercase tracking-[0.2em]">Your Name</label>
-                  <input 
-                    type="text" 
-                    placeholder="John Doe"
-                    className={`w-full p-5 rounded-[8px] outline-none transition-all border-2 ${
-                      errors.name 
-                      ? 'bg-red-50 border-red-500 focus:border-red-600' 
-                      : 'bg-[#F5F5F5] border-[#F5F5F5] focus:border-[#1AB69D]'
-                    }`}
-                    value={formData.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                  />
-                  {errors.name && (
-                    <div className="flex items-center gap-1 mt-1 text-red-500 text-xs font-bold animate-fade-in">
-                      <AlertCircle size={14} />
-                      <span>{errors.name}</span>
-                    </div>
-                  )}
-                </div>
 
-                <div className="space-y-1">
-                  <label className="text-xs font-black text-[#0A0A0A] uppercase tracking-[0.2em]">Email Address</label>
-                  <input 
-                    type="email" 
-                    placeholder="john@company.com"
-                    className={`w-full p-5 rounded-[8px] outline-none transition-all border-2 ${
-                      errors.email 
-                      ? 'bg-red-50 border-red-500 focus:border-red-600' 
-                      : 'bg-[#F5F5F5] border-[#F5F5F5] focus:border-[#1AB69D]'
-                    }`}
-                    value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                  />
-                  {errors.email && (
-                    <div className="flex items-center gap-1 mt-1 text-red-500 text-xs font-bold animate-fade-in">
-                      <AlertCircle size={14} />
-                      <span>{errors.email}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-black text-[#0A0A0A] uppercase tracking-[0.2em]">Company (Optional)</label>
-                  <input 
-                    type="text" 
-                    placeholder="Your Company Name"
-                    className="w-full bg-[#F5F5F5] border-2 border-[#F5F5F5] focus:border-[#1AB69D] p-5 rounded-[8px] outline-none transition-all"
-                    value={formData.company}
-                    onChange={(e) => handleInputChange('company', e.target.value)}
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-black text-[#0A0A0A] uppercase tracking-[0.2em]">Tell Us What You Need</label>
-                  <textarea 
-                    rows={5}
-                    placeholder="Tell us about your project, goals, and how we can help..."
-                    className={`w-full p-5 rounded-[8px] outline-none transition-all border-2 ${
-                      errors.message 
-                      ? 'bg-red-50 border-red-500 focus:border-red-600' 
-                      : 'bg-[#F5F5F5] border-[#F5F5F5] focus:border-[#1AB69D]'
-                    }`}
-                    value={formData.message}
-                    onChange={(e) => handleInputChange('message', e.target.value)}
-                  />
-                  {errors.message && (
-                    <div className="flex items-center gap-1 mt-1 text-red-500 text-xs font-bold animate-fade-in">
-                      <AlertCircle size={14} />
-                      <span>{errors.message}</span>
-                    </div>
-                  )}
-                </div>
-
-                <button 
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full bg-[#1AB69D] text-white py-5 rounded-[8px] font-bold text-xl transition-all transform hover:scale-[1.02] flex items-center justify-center space-x-3 active:scale-95 shadow-xl ${
-                    isSubmitting ? 'opacity-70 cursor-wait' : 'hover:bg-[#158F7C]'
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-                  ) : (
-                    <>
-                      <Send size={24} />
-                      <span className="tracking-widest uppercase">Send Message</span>
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* Contact Info */}
-          <div className="flex flex-col justify-center">
-            <h3 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] mb-12 uppercase tracking-tighter italic">REACH OUT</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="space-y-4 group">
-                <div className="bg-[#F5F5F5] w-16 h-16 rounded-[8px] flex items-center justify-center text-[#1AB69D] transition-colors group-hover:bg-[#1AB69D] group-hover:text-white">
-                  <Phone size={32} />
-                </div>
-                <h4 className="text-xl font-bold text-[#0A0A0A]">Call Us</h4>
-                <div className="space-y-1 text-[#1AB69D] font-medium">
-                  <a href="tel:+25766511150" className="block hover:underline">(+257) 66 511 150</a>
-                  <a href="tel:+25779681209" className="block hover:underline">(+257) 79 681 209</a>
+              {/* Explicit Prototype Notice */}
+              <div
+                className="mb-7 rounded-xl bg-[#EAF5F3] border border-[#0D7A6E]/25 p-4 flex items-start gap-3"
+                role="note"
+              >
+                <Info
+                  size={18}
+                  className="text-[#0D7A6E] shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
+                <div className="text-sm text-[#102D38] leading-[1.55]">
+                  <strong className="font-semibold">Design prototype notice:</strong> Form
+                  submission is disabled in this review build until live email delivery is
+                  configured. Please reach our team directly via{' '}
+                  <a
+                    href="mailto:info@aktivate.bi"
+                    className="font-semibold text-[#0D7A6E] underline underline-offset-2"
+                  >
+                    info@aktivate.bi
+                  </a>{' '}
+                  or phone.
                 </div>
               </div>
 
-              <div className="space-y-4 group">
-                <div className="bg-[#F5F5F5] w-16 h-16 rounded-[8px] flex items-center justify-center text-[#1AB69D] transition-colors group-hover:bg-[#1AB69D] group-hover:text-white">
-                  <Mail size={32} />
-                </div>
-                <h4 className="text-xl font-bold text-[#0A0A0A]">Email Us</h4>
-                <a href="mailto:info@aktivate.bi" className="text-[#1AB69D] font-medium hover:underline">info@aktivate.bi</a>
-              </div>
-
-              <div className="space-y-4 group">
-                <div className="bg-[#F5F5F5] w-16 h-16 rounded-[8px] flex items-center justify-center text-[#1AB69D] transition-colors group-hover:bg-[#1AB69D] group-hover:text-white">
-                  <MapPin size={32} />
-                </div>
-                <h4 className="text-xl font-bold text-[#0A0A0A]">Visit Us</h4>
-                <p className="text-[#2D2D2D]">Bujumbura, Burundi</p>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="text-xl font-bold text-[#0A0A0A] mb-4 uppercase tracking-widest text-xs">Follow the Movement</h4>
-                <div className="flex space-x-6">
-                  {[Instagram, Facebook, Linkedin].map((Icon, i) => (
-                    <a 
-                      key={i} 
-                      href="#" 
-                      className="text-[#2D2D2D] hover:text-[#1AB69D] hover:scale-125 transition-all duration-300 transform"
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="space-y-5"
+                noValidate
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label
+                      htmlFor="contact-name"
+                      className="block text-sm font-medium text-[#1B252B] mb-2"
                     >
-                      <Icon size={32} />
-                    </a>
-                  ))}
+                      Name
+                    </label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg bg-[#F4F3EE] border border-[#1B252B]/15 text-[#1B252B] text-sm focus:outline-none focus:border-[#0D7A6E]"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-email"
+                      className="block text-sm font-medium text-[#1B252B] mb-2"
+                    >
+                      Email
+                    </label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      placeholder="you@organisation.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg bg-[#F4F3EE] border border-[#1B252B]/15 text-[#1B252B] text-sm focus:outline-none focus:border-[#0D7A6E]"
+                    />
+                  </div>
                 </div>
-              </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label
+                      htmlFor="contact-organisation"
+                      className="block text-sm font-medium text-[#1B252B] mb-2"
+                    >
+                      Organisation <span className="text-[#344249]/70 font-normal">(optional)</span>
+                    </label>
+                    <input
+                      id="contact-organisation"
+                      type="text"
+                      placeholder="Company or institution"
+                      value={formData.organisation}
+                      onChange={(e) => setFormData({ ...formData, organisation: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg bg-[#F4F3EE] border border-[#1B252B]/15 text-[#1B252B] text-sm focus:outline-none focus:border-[#0D7A6E]"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-interest"
+                      className="block text-sm font-medium text-[#1B252B] mb-2"
+                    >
+                      Area of interest{' '}
+                      <span className="text-[#344249]/70 font-normal">(optional)</span>
+                    </label>
+                    <select
+                      id="contact-interest"
+                      value={formData.areaOfInterest}
+                      onChange={(e) =>
+                        setFormData({ ...formData, areaOfInterest: e.target.value })
+                      }
+                      className="w-full px-4 py-3 rounded-lg bg-[#F4F3EE] border border-[#1B252B]/15 text-[#1B252B] text-sm focus:outline-none focus:border-[#0D7A6E]"
+                    >
+                      <option value="">Select an area</option>
+                      {serviceAreas.map((area) => (
+                        <option key={area} value={area}>
+                          {area}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="contact-message"
+                    className="block text-sm font-medium text-[#1B252B] mb-2"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    rows={5}
+                    placeholder="Tell us about your brand, objectives or upcoming campaign..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-[#F4F3EE] border border-[#1B252B]/15 text-[#1B252B] text-sm focus:outline-none focus:border-[#0D7A6E]"
+                  />
+                </div>
+
+                <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <button
+                    type="submit"
+                    disabled
+                    aria-disabled="true"
+                    className="inline-flex items-center justify-center px-6 py-3.5 rounded-lg bg-[#102D38]/25 text-[#102D38]/60 font-semibold text-sm min-h-[46px] cursor-not-allowed whitespace-nowrap"
+                  >
+                    Submit disabled in prototype
+                  </button>
+
+                  <a
+                    href="mailto:info@aktivate.bi"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0D7A6E] hover:text-[#102D38] transition-colors whitespace-nowrap"
+                  >
+                    <span>Email info@aktivate.bi directly</span>
+                    <ArrowUpRight size={15} aria-hidden="true" />
+                  </a>
+                </div>
+              </form>
             </div>
 
-            {/* Alternative Action */}
-            <div className="mt-20 p-10 bg-[#0A0A0A] rounded-[16px] text-center text-white shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#1AB69D]/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700"></div>
-              <h4 className="text-2xl font-bold mb-8 relative z-10">Prefer to chat?</h4>
-              <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 relative z-10">
-                <button className="w-full md:w-auto border-2 border-white/20 px-8 py-3 rounded-[8px] font-bold hover:bg-white hover:text-[#0A0A0A] hover:border-white transition-all">
-                  Schedule a Call
-                </button>
-                <button className="w-full md:w-auto bg-[#1AB69D] border-2 border-[#1AB69D] px-8 py-3 rounded-[8px] font-bold hover:bg-[#158F7C] hover:border-[#158F7C] transition-all">
-                  WhatsApp Us
-                </button>
+            {/* Verified Contact Details */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="bg-white border border-[#1B252B]/10 rounded-2xl p-7 md:p-9 space-y-7">
+                <div>
+                  <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.16em] mb-2">
+                    Direct Contact
+                  </p>
+                  <h2 className="font-heading text-2xl font-bold text-[#1B252B]">
+                    Reach our team in Bujumbura
+                  </h2>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4 border-t border-[#1B252B]/10 pt-5">
+                    <div className="w-10 h-10 rounded-lg bg-[#EAF5F3] text-[#0D7A6E] flex items-center justify-center shrink-0">
+                      <Phone size={18} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-sm font-bold text-[#1B252B] mb-1">Phone</h3>
+                      <div className="space-y-1 text-sm text-[#344249] tabular-nums">
+                        <a
+                          href="tel:+25766511150"
+                          className="block hover:text-[#0D7A6E] transition-colors"
+                        >
+                          (+257) 66 511 150
+                        </a>
+                        <a
+                          href="tel:+25779681209"
+                          className="block hover:text-[#0D7A6E] transition-colors"
+                        >
+                          (+257) 79 681 209
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 border-t border-[#1B252B]/10 pt-5">
+                    <div className="w-10 h-10 rounded-lg bg-[#EAF5F3] text-[#0D7A6E] flex items-center justify-center shrink-0">
+                      <Mail size={18} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-sm font-bold text-[#1B252B] mb-1">Email</h3>
+                      <a
+                        href="mailto:info@aktivate.bi"
+                        className="text-sm text-[#0D7A6E] font-medium hover:underline"
+                      >
+                        info@aktivate.bi
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 border-t border-[#1B252B]/10 pt-5">
+                    <div className="w-10 h-10 rounded-lg bg-[#EAF5F3] text-[#0D7A6E] flex items-center justify-center shrink-0">
+                      <MapPin size={18} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-sm font-bold text-[#1B252B] mb-1">
+                        Location
+                      </h3>
+                      <p className="text-sm text-[#344249]">Bujumbura, Burundi</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#102D38] text-white rounded-2xl p-7 md:p-9">
+                <p className="text-[#15B8A6] text-xs font-semibold uppercase tracking-[0.16em] mb-2">
+                  Philosophy
+                </p>
+                <p className="font-heading text-2xl font-bold leading-snug mb-2">
+                  Imagine. Dare. <span className="text-[#15B8A6]">Create.</span>
+                </p>
+                <p className="text-sm text-[#DCE5E8] leading-[1.6]">
+                  Building stronger brands. Managing them better.
+                </p>
               </div>
             </div>
           </div>
-
         </div>
       </section>
     </div>

@@ -65,14 +65,14 @@ const Home: React.FC = () => {
       num: '01',
       title: 'Brand Intelligence & Research',
       description:
-        'Market research, audience insight and competitive intelligence that clarify where opportunities lie and ground every brand decision in reality.',
+        'Market research, customer insights, brand health studies, customer experience, competitive intelligence and performance research.',
       icon: Search,
     },
     {
       num: '02',
       title: 'Brand Strategy & Development',
       description:
-        'Brand positioning, architecture, verbal direction and visual identity systems built to give organisations clear differentiation and lasting relevance.',
+        'Brand positioning, identity development, brand strategy, marketing strategy, communications strategy and brand architecture.',
       icon: Compass,
     },
   ];
@@ -82,7 +82,7 @@ const Home: React.FC = () => {
       num: '03',
       title: 'Brand Management & Advisory',
       description:
-        'Ongoing brand governance, portfolio alignment and practical advisory that help leadership teams keep their brand coherent as the business grows.',
+        'Brand-management assessments, Brand Management System design and implementation, brand governance, ongoing advisory and performance reviews.',
       icon: Layers,
       featured: true,
     },
@@ -90,7 +90,7 @@ const Home: React.FC = () => {
       num: '04',
       title: 'Creative & Communications',
       description:
-        'Integrated campaign concepts, copywriting, graphic design and content production crafted to connect meaningfully across channels.',
+        'Advertising, creative development, graphic design, digital communications, content production, audiovisual production and integrated campaigns.',
       icon: PenTool,
       featured: false,
     },
@@ -98,7 +98,7 @@ const Home: React.FC = () => {
       num: '05',
       title: 'Brand Experiences & Activations',
       description:
-        'Product launches, live activations and customer touchpoints designed to turn brand promises into memorable real-world engagement.',
+        'Experiential marketing, promotions, events, product launches, consumer engagement and brand activations.',
       icon: CalendarRange,
       featured: false,
     },
@@ -127,27 +127,18 @@ const Home: React.FC = () => {
     },
   ];
 
-  const reservedPortfolioContainers = [
+  const supportingProjects = [
     {
-      index: '01',
-      domain: 'Brand Development',
-      note: 'Reserved container for verified identity, positioning and brand system work.',
-      spanClass: 'lg:col-span-6',
-      aspectClass: 'aspect-[16/10]',
+      client: 'BGF Bank',
+      category: 'Campaigns & Communications',
+      summary: 'Retail banking, branch communication and digital product campaign artwork.',
+      image: '/assets/recovery/campaigns/campaign_bgf_bank_montage.png',
     },
     {
-      index: '02',
-      domain: 'Campaigns & Creative',
-      note: 'Reserved container for verified advertising and integrated communications artwork.',
-      spanClass: 'lg:col-span-3',
-      aspectClass: 'aspect-[4/3] lg:aspect-[4/4.15]',
-    },
-    {
-      index: '03',
-      domain: 'Brand Experiences & Activations',
-      note: 'Reserved container for verified launch and experiential activation photography.',
-      spanClass: 'lg:col-span-3',
-      aspectClass: 'aspect-[4/3] lg:aspect-[4/4.15]',
+      client: "Vital'o",
+      category: 'Experiences & Activations',
+      summary: 'Sports sponsorship, product communication and hydration campaign artwork.',
+      image: '/assets/recovery/campaigns/campaign_vitalo_montage.png',
     },
   ];
 
@@ -155,38 +146,38 @@ const Home: React.FC = () => {
     {
       title: 'Market understanding',
       description:
-        'Rooted in real context across Burundi and East Africa, combining local cultural nuance with disciplined research.',
+        'Grounded research and customer insight before recommending creative or commercial direction.',
     },
     {
-      title: 'Strategic perspective',
+      title: 'Strategic judgement',
       description:
-        'Focused on the commercial and brand priorities that shape long-term preference rather than short-lived noise.',
+        'Focused decisions on positioning, brand architecture and priorities rather than reactive tactics.',
     },
     {
-      title: 'Creative strength',
+      title: 'Creative capabilities',
       description:
-        'Crafted ideas, visual systems and communications designed to earn attention and hold meaning over time.',
+        'Brand identity, integrated campaigns, content production and live activations delivered coherently.',
     },
     {
-      title: 'Continuous partnership',
+      title: 'Ongoing partnership',
       description:
-        'Working alongside client teams as an invested partner—from strategic definition through active brand management.',
+        'Practical brand-management support that stays engaged with your team beyond launch day.',
     },
   ];
 
   return (
     <div className="pt-[72px]">
       {/* Section 01 — Hero */}
-      <section className="bg-[#102D38] text-white py-16 md:py-20 lg:py-24">
+      <section className="bg-[#102D38] text-white py-14 md:py-20 lg:py-22">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Copy Column — prioritized first on mobile */}
             <div className="lg:col-span-6 order-1">
-              <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-5">
+              <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
                 BRANDING &amp; BRAND MANAGEMENT. REIMAGINED.
               </p>
 
-              <h1 className="font-heading text-[36px] sm:text-[44px] lg:text-[54px] font-bold leading-[1.08] tracking-[-0.025em] text-white text-balance mb-6">
+              <h1 className="font-heading text-[36px] sm:text-[44px] lg:text-[52px] font-bold leading-[1.08] tracking-[-0.025em] text-white text-balance mb-5">
                 Building stronger brands.{' '}
                 <span className="text-[#15B8A6]">Managing them better.</span>
               </h1>
@@ -232,18 +223,18 @@ const Home: React.FC = () => {
       </section>
 
       {/* Section 02 — The Aktivate Approach */}
-      <section className="bg-[#F4F3EE] py-20 lg:py-28">
+      <section className="bg-[#F4F3EE] py-14 lg:py-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6">
-              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 The Aktivate Approach
               </p>
               <h2 className="font-heading text-[30px] md:text-[40px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance">
                 Great brands need more than great ideas.
               </h2>
-              <div className="w-12 h-[2px] bg-[#15B8A6] my-6" aria-hidden="true" />
-              <div className="space-y-4 text-[#344249] text-base md:text-[17px] leading-[1.7] max-w-[54ch]">
+              <div className="w-12 h-[2px] bg-[#15B8A6] my-5" aria-hidden="true" />
+              <div className="space-y-4 text-[#344249] text-base md:text-[17px] leading-[1.68] max-w-[54ch]">
                 <p>
                   They need insight, clear direction, thoughtful management and creative experiences
                   that connect with people.
@@ -268,11 +259,11 @@ const Home: React.FC = () => {
       </section>
 
       {/* Section 03 — Our Expertise */}
-      <section id="expertise" className="bg-white py-20 lg:py-28 scroll-mt-20">
+      <section id="expertise" className="bg-white py-16 lg:py-24 scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-12 lg:mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-12">
             <div className="lg:col-span-8">
-              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 Our Expertise
               </p>
               <h2 className="font-heading text-[30px] md:text-[42px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance max-w-[22ch]">
@@ -284,7 +275,7 @@ const Home: React.FC = () => {
                 to="/services"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] border-b border-[#102D38]/25 hover:border-[#0D7A6E] pb-1 transition-colors whitespace-nowrap shrink-0"
               >
-                <span>View full capabilities</span>
+                <span>Explore all five services</span>
                 <ArrowRight size={15} aria-hidden="true" />
               </Link>
             </div>
@@ -292,17 +283,16 @@ const Home: React.FC = () => {
 
           {/* Asymmetric 6-column Editorial Composition */}
           <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
-            {/* Upper Row: Two broad strategic disciplines */}
             {expertiseLead.map((service) => {
               const Icon = service.icon;
               return (
                 <Link
                   key={service.num}
                   to="/services"
-                  className="md:col-span-3 group bg-[#F4F3EE] border border-[#1B252B]/10 rounded-2xl p-8 lg:p-10 flex flex-col justify-between transition-all duration-200 hover:border-[#15B8A6]/60 hover:-translate-y-0.5"
+                  className="md:col-span-3 group bg-[#F4F3EE] border border-[#1B252B]/10 rounded-2xl p-7 lg:p-9 flex flex-col justify-between transition-all duration-200 hover:border-[#15B8A6]/60 hover:-translate-y-0.5"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center justify-between mb-6">
                       <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
                         {service.num}
                       </span>
@@ -316,11 +306,11 @@ const Home: React.FC = () => {
                     <h3 className="font-heading text-xl md:text-2xl font-bold text-[#1B252B] tracking-tight mb-3">
                       {service.title}
                     </h3>
-                    <p className="text-[#344249] text-[15px] md:text-base leading-[1.65] max-w-[46ch]">
+                    <p className="text-[#344249] text-[15px] md:text-base leading-[1.65] max-w-[48ch]">
                       {service.description}
                     </p>
                   </div>
-                  <div className="mt-8 pt-5 border-t border-[#1B252B]/10 flex items-center justify-between text-sm font-semibold text-[#102D38] group-hover:text-[#0D7A6E] transition-colors">
+                  <div className="mt-7 pt-4 border-t border-[#1B252B]/10 flex items-center justify-between text-sm font-semibold text-[#102D38] group-hover:text-[#0D7A6E] transition-colors">
                     <span>Explore discipline</span>
                     <ArrowRight
                       size={16}
@@ -332,7 +322,6 @@ const Home: React.FC = () => {
               );
             })}
 
-            {/* Lower Row: Featured Dark Brand Management Anchor + Two Execution Pillars */}
             {expertiseCore.map((service) => {
               const Icon = service.icon;
               return (
@@ -403,10 +392,9 @@ const Home: React.FC = () => {
       </section>
 
       {/* Section 04 — Brand Management & Advisory */}
-      <section id="brand-management" className="bg-[#EAF5F3] py-20 lg:py-28 scroll-mt-20">
+      <section id="brand-management" className="bg-[#EAF5F3] py-16 lg:py-24 scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Workshop Photography */}
             <div className="lg:col-span-6">
               <WorkplaceImage
                 src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_55_PM-2_cd046b1b.png"
@@ -416,12 +404,11 @@ const Home: React.FC = () => {
               />
             </div>
 
-            {/* Advisory Narrative */}
             <div className="lg:col-span-6">
-              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 Brand Management &amp; Advisory
               </p>
-              <h2 className="font-heading text-[30px] md:text-[38px] font-bold text-[#102D38] leading-[1.15] tracking-[-0.02em] text-balance mb-5">
+              <h2 className="font-heading text-[28px] md:text-[38px] font-bold text-[#102D38] leading-[1.15] tracking-[-0.02em] text-balance mb-4">
                 Your brand is always evolving. The way you manage it should too.
               </h2>
               <p className="text-[#273840] text-base md:text-[17px] leading-[1.65] mb-8 max-w-[56ch]">
@@ -429,7 +416,7 @@ const Home: React.FC = () => {
                 and actions into a more effective and continuous approach to brand management.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 mb-9">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-8">
                 {managementIdeas.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -463,12 +450,12 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 05 — Selected Work */}
-      <section id="selected-work" className="bg-white py-20 lg:py-28 scroll-mt-20">
+      {/* Section 05 — Selected Work (Authentic Client Campaign Artwork) */}
+      <section id="selected-work" className="bg-white py-16 lg:py-24 scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12 lg:mb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12">
             <div className="lg:col-span-6">
-              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 Selected Work
               </p>
               <h2 className="font-heading text-[30px] md:text-[42px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance">
@@ -484,76 +471,107 @@ const Home: React.FC = () => {
                 to="/work"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] border-b border-[#102D38]/25 hover:border-[#0D7A6E] pb-1 transition-colors self-start lg:self-end whitespace-nowrap shrink-0"
               >
-                <span>Explore Our Work</span>
+                <span>View all selected work</span>
                 <ArrowRight size={15} aria-hidden="true" />
               </Link>
             </div>
           </div>
 
-          {/* Three Reserved Portfolio Containers (no invented clients or metrics) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {reservedPortfolioContainers.map((slot) => (
-              <Link
-                key={slot.index}
-                to="/work"
-                className={`${slot.spanClass} group block rounded-2xl bg-[#F4F3EE] border border-[#1B252B]/12 overflow-hidden transition-all duration-200 hover:border-[#15B8A6]/70`}
-              >
-                <div
-                  className={`${slot.aspectClass} relative p-7 md:p-8 flex flex-col justify-between bg-[linear-gradient(to_right,rgba(16,45,56,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,45,56,0.04)_1px,transparent_1px)] bg-[size:32px_32px]`}
-                >
-                  <div className="flex items-center justify-between text-xs text-[#344249]">
-                    <span className="font-heading font-bold text-[#0D7A6E] tabular-nums">
-                      {slot.index} / Portfolio Slot
-                    </span>
-                    <span className="text-[#344249]/80">Reserved</span>
-                  </div>
-
-                  <div className="mt-auto pt-8">
-                    <h3 className="font-heading text-xl md:text-2xl font-bold text-[#1B252B] tracking-tight mb-2 group-hover:text-[#0D7A6E] transition-colors">
-                      {slot.domain}
-                    </h3>
-                    <p className="text-sm text-[#344249] leading-[1.55] max-w-[38ch] mb-4">
-                      {slot.note}
-                    </p>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#102D38] group-hover:text-[#0D7A6E] transition-colors">
-                      <span>View category</span>
-                      <ArrowRight
-                        size={15}
-                        className="transition-transform duration-200 group-hover:translate-x-1"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </div>
+          {/* Featured Client Campaign (Primus) + Two Supporting Projects (BGF Bank, Vital'o) */}
+          <div className="space-y-6">
+            <Link
+              to="/work"
+              className="group grid grid-cols-1 lg:grid-cols-12 bg-[#F4F3EE] border border-[#1B252B]/12 rounded-2xl overflow-hidden transition-all duration-200 hover:border-[#15B8A6]/70"
+            >
+              <div className="lg:col-span-7 bg-[#E5E3DB] aspect-[16/10] overflow-hidden">
+                <img
+                  src="/assets/recovery/campaigns/campaign_primus_montage.png"
+                  alt="Primus social and activation campaign visual montage preserving original brand execution"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </div>
+              <div className="lg:col-span-5 p-8 lg:p-10 flex flex-col justify-between">
+                <div>
+                  <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.16em] mb-3">
+                    Campaigns &amp; Communications
+                  </p>
+                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-[#1B252B] tracking-tight mb-4 group-hover:text-[#0D7A6E] transition-colors">
+                    Primus
+                  </h3>
+                  <p className="text-[#344249] text-base leading-[1.65] max-w-[40ch]">
+                    Integrated social campaign visuals and regional live-music activation creatives
+                    preserving Primus and Primus Black visual identities.
+                  </p>
                 </div>
-              </Link>
-            ))}
+                <div className="mt-8 pt-5 border-t border-[#1B252B]/10 flex items-center justify-between text-sm font-semibold text-[#102D38] group-hover:text-[#0D7A6E] transition-colors">
+                  <span>Explore project showcase</span>
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
+            </Link>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {supportingProjects.map((project) => (
+                <Link
+                  key={project.client}
+                  to="/work"
+                  className="group bg-[#F4F3EE] border border-[#1B252B]/12 rounded-2xl overflow-hidden flex flex-col transition-all duration-200 hover:border-[#15B8A6]/70"
+                >
+                  <div className="aspect-[16/10] bg-[#E5E3DB] overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={`${project.client} campaign montage`}
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="p-7 flex flex-col justify-between flex-grow">
+                    <div>
+                      <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.16em] mb-2">
+                        {project.category}
+                      </p>
+                      <h3 className="font-heading text-xl md:text-2xl font-bold text-[#1B252B] tracking-tight mb-2 group-hover:text-[#0D7A6E] transition-colors">
+                        {project.client}
+                      </h3>
+                      <p className="text-sm md:text-[15px] text-[#344249] leading-[1.6]">
+                        {project.summary}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Section 06 — Why Aktivate */}
-      <section className="bg-[#F4F3EE] py-20 lg:py-28">
+      <section className="bg-[#F4F3EE] py-16 lg:py-22">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-7">
-              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 Why Aktivate
               </p>
-              <h2 className="font-heading text-[30px] md:text-[42px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance mb-5">
+              <h2 className="font-heading text-[30px] md:text-[40px] font-bold text-[#1B252B] leading-[1.12] tracking-[-0.02em] text-balance mb-4">
                 Big-picture thinking. Hands-on partnership.
               </h2>
-              <div className="space-y-3 text-[#344249] text-base md:text-[17px] leading-[1.65] max-w-[58ch] mb-10">
-                <p>
-                  We bring together market understanding, strategic judgement, creative expertise
-                  and a collaborative way of working.
-                </p>
-                <p>We work closely with our clients to turn priorities into meaningful action.</p>
-              </div>
+              <p className="text-[#344249] text-base md:text-[17px] leading-[1.65] max-w-[56ch] mb-9">
+                Clients work with Aktivate because we connect practical market knowledge with
+                disciplined strategy, creative execution and continuous support.
+              </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
                 {strengths.map((item) => (
                   <div key={item.title} className="border-t border-[#1B252B]/15 pt-4">
-                    <h3 className="font-heading text-lg font-bold text-[#1B252B] mb-2">
+                    <h3 className="font-heading text-lg font-bold text-[#1B252B] mb-1.5">
                       {item.title}
                     </h3>
                     <p className="text-sm md:text-[15px] text-[#344249] leading-[1.6]">
@@ -568,7 +586,7 @@ const Home: React.FC = () => {
               <WorkplaceImage
                 src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_53_PM-1_2348b281.png"
                 alt="Team members in natural conversation around a conference table during a planning session"
-                className="rounded-2xl aspect-[4/3] lg:aspect-[4/4.5] bg-[#E3E0D7]"
+                className="rounded-2xl aspect-[4/3] lg:aspect-[4/4.3] bg-[#E3E0D7]"
                 imgClassName="object-cover object-center"
               />
             </div>
@@ -577,14 +595,14 @@ const Home: React.FC = () => {
       </section>
 
       {/* Section 07 — Contact */}
-      <section className="bg-[#102D38] text-white py-20 lg:py-28">
+      <section className="bg-[#102D38] text-white py-18 lg:py-24">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
             <div className="lg:col-span-8">
               <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
                 Let&apos;s build something stronger.
               </p>
-              <h2 className="font-heading text-[34px] md:text-[48px] font-bold leading-[1.1] tracking-[-0.025em] text-white text-balance mb-5">
+              <h2 className="font-heading text-[34px] md:text-[46px] font-bold leading-[1.1] tracking-[-0.025em] text-white text-balance mb-5">
                 Where could your brand go next?
               </h2>
               <p className="text-[#DCE5E8] text-base md:text-[18px] leading-[1.65] max-w-[54ch] mb-8">

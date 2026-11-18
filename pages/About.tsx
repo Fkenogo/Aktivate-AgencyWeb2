@@ -1,78 +1,202 @@
 import React from 'react';
-import SectionHeader from '../components/SectionHeader';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 const About: React.FC = () => {
-  const differences = [
+  const principles = [
     {
-      id: '01',
-      title: 'STRATEGIC ALCHEMY',
-      desc: 'We transform market insights and client goals into brand gold. No guesswork. No fluff. Just results.'
+      num: '01',
+      title: 'How we approach client challenges',
+      body: 'We begin by listening and examining the real commercial and market context. Rather than jumping straight to visual outputs, we ground strategy and creative decisions in clear customer and business insight.',
     },
     {
-      id: '02',
-      title: 'UNHINGED CREATIVITY',
-      desc: 'We push boundaries with a healthy dose of "let\'s try this." Safe never changed anything.'
+      num: '02',
+      title: 'Our collaborative working culture',
+      body: 'Our studio operates through open conversation, shared tables and direct dialogue with client teams. We value clarity, practical thinking and approachable professionalism over agency jargon.',
     },
     {
-      id: '03',
-      title: 'EMBEDDED PARTNERSHIP',
-      desc: 'We\'re not vendors. We\'re your team. Your success is our obsession.'
-    }
+      num: '03',
+      title: 'Strategic and creative expertise together',
+      body: 'Research, brand positioning, Brand Management Systems, creative development and experiential activations sit under one roof so strategy and execution reinforce one another.',
+    },
+    {
+      num: '04',
+      title: 'Commitment to ongoing partnerships',
+      body: 'Strong brands are shaped through consistency over time. We stay engaged with clients beyond individual campaigns to support governance, adaptation and steady brand growth.',
+    },
   ];
 
   return (
-    <div className="pt-20">
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-[#0A0A0A] to-[#1AB69D] py-24 md:py-40 px-6 text-center text-white">
-        <h1 className="text-[40px] md:text-[64px] font-[800] leading-tight mb-8 uppercase tracking-tighter">WE ARE AKTIVATORS</h1>
-        <p className="text-[18px] md:text-[24px] max-w-[800px] mx-auto text-[#F5F5F5] leading-relaxed">
-          The renegade strategists of Burundi. <br />
-          The ones who turn products into movements.
-        </p>
+    <div className="pt-[72px]">
+      {/* Opening Header */}
+      <section className="bg-[#102D38] text-white py-16 md:py-24">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="max-w-[74ch]">
+            <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
+              About Aktivate
+            </p>
+            <h1 className="font-heading text-[34px] sm:text-[42px] lg:text-[50px] font-bold leading-[1.08] tracking-[-0.025em] text-white text-balance mb-5">
+              Creative in our thinking. Strategic in our approach.
+            </h1>
+            <p className="text-[#DCE5E8] text-lg md:text-[20px] font-medium leading-[1.5]">
+              Invested in the brands we build and manage.
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* Our Story */}
-      <section className="bg-white py-20 md:py-[120px] px-6 md:px-[120px]">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="aspect-[4/3] bg-[#F5F5F5] rounded-[16px] overflow-hidden">
-            <img 
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=75&w=800&fm=webp" 
-              alt="Team creative workspace" 
-              className="w-full h-full object-cover grayscale" 
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <h2 className="text-[32px] md:text-[40px] font-bold text-[#0A0A0A] mb-8">Our Story</h2>
-            <div className="space-y-6 text-[#2D2D2D] text-lg leading-[1.8]">
-              <p>
-                We're not your average Burundi-based branding and communications agency. 
-                We're a band of renegade strategists and creatives who are passionate about 
-                blending strategic insights with captivating ideas to craft result-driven activations.
+      {/* Core Story & Who We Are */}
+      <section className="bg-[#F4F3EE] py-16 lg:py-24">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div className="lg:col-span-6">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
+                Who We Are
               </p>
-              <p>
-                We believe in pushing Boundaries and Exploring Possibilities, driven by three words: 
-                <span className="text-[#1AB69D] font-bold"> Imagine, Dare, Create.</span>
+              <h2 className="font-heading text-[28px] md:text-[38px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance mb-5">
+                An established branding and brand-management agency rooted in Burundi.
+              </h2>
+              <div className="w-12 h-[2px] bg-[#15B8A6] mb-6" aria-hidden="true" />
+              <div className="space-y-4 text-[#344249] text-base md:text-[17px] leading-[1.7] max-w-[56ch]">
+                <p>
+                  Aktivate brings together expertise in research, brand strategy, brand management,
+                  communications and creative execution.
+                </p>
+                <p>
+                  We work closely with organisations to understand their challenges, develop
+                  practical solutions and support their brands beyond individual assignments.
+                </p>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <div className="rounded-2xl overflow-hidden bg-[#E3E0D7] aspect-[4/3]">
+                <img
+                  src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_58_PM-4_ac2ade97.png"
+                  alt="Colleagues collaborating around a wooden table reviewing visual brand layouts"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Approach & Working Culture */}
+      <section className="bg-white py-16 lg:py-24">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            <div className="lg:col-span-5 space-y-6">
+              <div>
+                <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
+                  How We Work
+                </p>
+                <h2 className="font-heading text-[28px] md:text-[36px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance">
+                  Approachable people. Disciplined brand thinking.
+                </h2>
+              </div>
+
+              <div className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
+                <img
+                  src="/assets/recovery/workplace/workplace_studio_3.jpg"
+                  alt="Two colleagues discussing work at a shared desk in natural light"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+
+              <div className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[16/10]">
+                <img
+                  src="/assets/recovery/workplace/workplace_aktivate_1.jpg"
+                  alt="Studio team gathered around a table during a creative review session"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 grid grid-cols-1 gap-6 lg:pt-4">
+              {principles.map((item) => (
+                <div
+                  key={item.num}
+                  className="bg-[#F4F3EE] border border-[#1B252B]/10 rounded-2xl p-7 md:p-8"
+                >
+                  <span className="block font-heading text-xs font-bold text-[#0D7A6E] tabular-nums mb-2">
+                    {item.num}
+                  </span>
+                  <h3 className="font-heading text-xl font-bold text-[#1B252B] mb-2.5">
+                    {item.title}
+                  </h3>
+                  <p className="text-[#344249] text-base leading-[1.68] max-w-[58ch]">
+                    {item.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Supporting Personality Band: We Are Aktivators */}
+      <section className="bg-[#EAF5F3] py-16 lg:py-20">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7">
+              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
+                Our Spirit
+              </p>
+              <h2 className="font-heading text-[28px] md:text-[36px] font-bold text-[#102D38] leading-[1.15] tracking-[-0.02em] mb-4">
+                We Are Aktivators.
+              </h2>
+              <p className="text-[#273840] text-base md:text-[17px] leading-[1.68] max-w-[56ch]">
+                It is how we describe our energy when solving brand challenges—curious enough to
+                question assumptions, bold enough to explore better directions and committed to
+                turning ideas into work that holds up in the real world.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5 lg:border-l lg:border-[#102D38]/15 lg:pl-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0D7A6E] mb-3">
+                Brand Philosophy
+              </p>
+              <p className="font-heading text-3xl md:text-4xl font-bold text-[#102D38] leading-[1.15] tracking-tight">
+                Imagine. Dare.{' '}
+                <span className="text-[#0D7A6E]">Create.</span>
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Our Difference */}
-      <section className="bg-[#F5F5F5] py-20 md:py-[120px] px-6 md:px-[120px]">
-        <div className="max-w-[1440px] mx-auto">
-          <SectionHeader title="OUR DIFFERENCE" />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {differences.map((diff, i) => (
-              <div key={i} className="bg-white p-10 rounded-[16px] border-l-4 border-[#1AB69D] relative overflow-hidden group shadow-lg">
-                <span className="absolute top-[-10px] right-[-10px] text-[100px] font-black text-[#1AB69D]/5 leading-none">
-                  {diff.id}
-                </span>
-                <h3 className="text-xl font-bold text-[#0A0A0A] mb-6 relative z-10">{diff.title}</h3>
-                <p className="text-[#2D2D2D] text-[14px] leading-[1.4] relative z-10">{diff.desc}</p>
-              </div>
-            ))}
+      {/* Closing CTA */}
+      <section className="bg-[#102D38] text-white py-16 lg:py-20">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div className="max-w-[56ch]">
+            <h2 className="font-heading text-2xl md:text-4xl font-bold text-white leading-[1.15] tracking-tight mb-3 text-balance">
+              Let&apos;s explore how we can support your brand.
+            </h2>
+            <p className="text-[#DCE5E8] text-base leading-[1.65]">
+              Whether you need market clarity, strategic direction or ongoing brand management, we
+              would welcome a conversation.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 shrink-0">
+            <Link
+              to="/services"
+              className="inline-flex items-center justify-center border border-white/30 text-white hover:bg-white/10 font-semibold text-sm px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap transition-colors"
+            >
+              Explore Our Expertise
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-[#15B8A6] text-[#102D38] hover:bg-[#1FD0BC] font-semibold text-sm px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap transition-colors"
+            >
+              <span>Start a Conversation</span>
+              <ArrowRight size={16} aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>

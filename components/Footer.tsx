@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Linkedin, Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -29,46 +29,17 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-4 space-y-4">
             <Link to="/" className="inline-block" aria-label="Aktivate Home">
               <img
-                src="/assets/aistudio/aktivate_logo-01_232a8292.png"
+                src="/assets/aistudio/aktivate_logo_white.png"
                 alt="Aktivate"
-                className="h-7 w-auto object-contain brightness-0 invert"
+                className="h-6 md:h-7 w-auto object-contain"
               />
             </Link>
-            <p className="text-white/75 text-sm leading-relaxed max-w-[30ch]">
+            <p className="text-white/80 text-sm leading-relaxed max-w-[32ch]">
               Building stronger brands. Managing them better.
             </p>
             <p className="text-[#15B8A6] text-xs font-semibold tracking-wide">
               Imagine. Dare. Create.
             </p>
-            <div className="flex items-center gap-4 pt-1">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="text-white/60 hover:text-[#15B8A6] transition-colors p-1.5 -ml-1.5"
-                aria-label="Aktivate on Instagram"
-              >
-                <Instagram size={18} />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="text-white/60 hover:text-[#15B8A6] transition-colors p-1.5"
-                aria-label="Aktivate on Facebook"
-              >
-                <Facebook size={18} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noreferrer"
-                className="text-white/60 hover:text-[#15B8A6] transition-colors p-1.5"
-                aria-label="Aktivate on LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
-            </div>
           </div>
 
           {/* Navigate */}
@@ -97,8 +68,13 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2.5">
               {expertiseItems.map((item) => (
-                <li key={item} className="text-white/75 text-sm">
-                  {item}
+                <li key={item}>
+                  <Link
+                    to="/services"
+                    className="text-white/75 hover:text-[#15B8A6] text-sm transition-colors"
+                  >
+                    {item}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -111,19 +87,19 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-3 text-white/85">
-                <Phone size={15} className="text-[#15B8A6] shrink-0" />
+                <Phone size={15} className="text-[#15B8A6] shrink-0" aria-hidden="true" />
                 <a href="tel:+25766511150" className="hover:text-[#15B8A6] transition-colors tabular-nums">
                   (+257) 66 511 150
                 </a>
               </li>
               <li className="flex items-center gap-3 text-white/85">
-                <Mail size={15} className="text-[#15B8A6] shrink-0" />
+                <Mail size={15} className="text-[#15B8A6] shrink-0" aria-hidden="true" />
                 <a href="mailto:info@aktivate.bi" className="hover:text-[#15B8A6] transition-colors">
                   info@aktivate.bi
                 </a>
               </li>
               <li className="flex items-center gap-3 text-white/75">
-                <MapPin size={15} className="text-[#15B8A6] shrink-0" />
+                <MapPin size={15} className="text-[#15B8A6] shrink-0" aria-hidden="true" />
                 <span>Bujumbura, Burundi</span>
               </li>
             </ul>
