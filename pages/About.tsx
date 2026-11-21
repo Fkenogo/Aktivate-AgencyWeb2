@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import TransitionLink from '../components/TransitionLink';
 
 const About: React.FC = () => {
   const principles = [
@@ -29,9 +29,9 @@ const About: React.FC = () => {
   return (
     <div className="pt-[72px]">
       {/* Opening Header */}
-      <section className="bg-[#102D38] text-white py-16 md:py-24">
+      <section data-surface="dark" className="bg-[#102D38] text-white py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
-          <div className="max-w-[74ch]">
+          <header className="max-w-[74ch]">
             <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
               About Aktivate
             </p>
@@ -41,7 +41,7 @@ const About: React.FC = () => {
             <p className="text-[#DCE5E8] text-lg md:text-[20px] font-medium leading-[1.5]">
               Invested in the brands we build and manage.
             </p>
-          </div>
+          </header>
         </div>
       </section>
 
@@ -50,12 +50,14 @@ const About: React.FC = () => {
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6">
-              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
-                Who We Are
-              </p>
-              <h2 className="font-heading text-[28px] md:text-[38px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance mb-5">
-                An established branding and brand-management agency rooted in Burundi.
-              </h2>
+              <header>
+                <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
+                  Who We Are
+                </p>
+                <h2 className="font-heading text-[28px] md:text-[38px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance mb-5">
+                  An established branding and brand-management agency rooted in Burundi.
+                </h2>
+              </header>
               <div className="w-12 h-[2px] bg-[#15B8A6] mb-6" aria-hidden="true" />
               <div className="space-y-4 text-[#344249] text-base md:text-[17px] leading-[1.7] max-w-[56ch]">
                 <p>
@@ -70,14 +72,14 @@ const About: React.FC = () => {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="rounded-2xl overflow-hidden bg-[#E3E0D7] aspect-[4/3]">
+              <figure className="rounded-2xl overflow-hidden bg-[#E3E0D7] aspect-[4/3]">
                 <img
                   src="/assets/recovery/workplace/workplace_aktivate_1.jpg"
                   alt="Aktivate team gathered around a studio table reviewing creative work together"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center"
                 />
-              </div>
+              </figure>
             </div>
           </div>
         </div>
@@ -88,7 +90,7 @@ const About: React.FC = () => {
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <div className="lg:col-span-5 space-y-6">
-              <div>
+              <header>
                 <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                   How We Work
                 </p>
@@ -99,9 +101,9 @@ const About: React.FC = () => {
                   We care deeply about the craft behind every identity, campaign and brand system—and
                   we keep the working relationship practical, human and collaborative.
                 </p>
-              </div>
+              </header>
 
-              <div className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
+              <figure className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
                 <img
                   src="/assets/recovery/workplace/workplace_studio_3.jpg"
                   alt="Two colleagues discussing work at a shared desk in natural light"
@@ -109,12 +111,12 @@ const About: React.FC = () => {
                   loading="lazy"
                   className="w-full h-full object-cover object-top"
                 />
-              </div>
+              </figure>
             </div>
 
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pt-2">
               {principles.map((item) => (
-                <div
+                <article
                   key={item.num}
                   className="bg-[#F4F3EE] border border-[#1B252B]/10 rounded-2xl p-7"
                 >
@@ -125,7 +127,7 @@ const About: React.FC = () => {
                     {item.title}
                   </h3>
                   <p className="text-[#344249] text-[15px] leading-[1.65]">{item.body}</p>
-                </div>
+                </article>
               ))}
             </div>
           </div>
@@ -136,7 +138,7 @@ const About: React.FC = () => {
       <section className="bg-[#EAF5F3] py-16 lg:py-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7">
+            <header className="lg:col-span-7">
               <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 Our Spirit
               </p>
@@ -148,9 +150,12 @@ const About: React.FC = () => {
                 sharper questions, exploring ideas with imagination and staying hands-on until the
                 work makes a real difference for the people it serves.
               </p>
-            </div>
+            </header>
 
-            <div className="lg:col-span-5 lg:border-l lg:border-[#102D38]/15 lg:pl-10">
+            <aside
+              aria-label="Brand philosophy"
+              className="lg:col-span-5 lg:border-l lg:border-[#102D38]/15 lg:pl-10"
+            >
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0D7A6E] mb-3">
                 Brand Philosophy
               </p>
@@ -158,15 +163,15 @@ const About: React.FC = () => {
                 Imagine. Dare.{' '}
                 <span className="text-[#0D7A6E]">Create.</span>
               </p>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
 
       {/* Closing CTA */}
-      <section className="bg-[#102D38] text-white py-16 lg:py-20">
+      <section data-surface="dark" className="bg-[#102D38] text-white py-16 lg:py-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-          <div className="max-w-[56ch]">
+          <header className="max-w-[56ch]">
             <h2 className="font-heading text-2xl md:text-4xl font-bold text-white leading-[1.15] tracking-tight mb-3 text-balance">
               Let&apos;s explore how we can support your brand.
             </h2>
@@ -174,21 +179,21 @@ const About: React.FC = () => {
               Whether you need market clarity, strategic direction or ongoing brand management, we
               would welcome a conversation.
             </p>
-          </div>
+          </header>
           <div className="flex flex-wrap items-center gap-4 shrink-0">
-            <Link
+            <TransitionLink
               to="/services"
               className="inline-flex items-center justify-center border border-white/30 text-white hover:bg-white/10 font-semibold text-sm px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap transition-colors"
             >
               Explore Our Expertise
-            </Link>
-            <Link
+            </TransitionLink>
+            <TransitionLink
               to="/contact"
               className="inline-flex items-center justify-center gap-2 bg-[#15B8A6] text-[#102D38] hover:bg-[#1FD0BC] font-semibold text-sm px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap transition-colors"
             >
               <span>Start a Conversation</span>
               <ArrowRight size={16} aria-hidden="true" />
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </section>

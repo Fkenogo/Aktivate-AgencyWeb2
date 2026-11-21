@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root {
+  --focus-ring-color: #102D38;
+  --focus-ring-halo: #FFFFFF;
+}
+
+[data-surface='dark'] {
+  --focus-ring-color: #FFFFFF;
+  --focus-ring-halo: #102D38;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+    accent-color: #0D7A6E;
+    scrollbar-color: #102D38 #F4F3EE;
+    scrollbar-width: auto;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #F4F3EE;
+    color: #1B252B;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    text-wrap: balance;
+  }
+
+  p, li {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: #15B8A6;
+    color: #102D38;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F4F3EE;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #102D38;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #15B8A6;
+  }
+
+  :is(a, button, input, select, textarea, summary, [tabindex]) {
+    outline-color: var(--focus-ring-color);
+  }
+}
+
+:is(a, button, input, select, textarea, summary, [tabindex]):not([data-focus='inset']):not(.skip-link):focus-visible {
+  outline: 3px solid var(--focus-ring-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--focus-ring-halo);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, transform;
+}
+
+[data-focus='inset']:focus-visible {
+  outline: 3px solid #102D38;
+  outline-offset: -3px;
+}
+
+[data-focus='inset']:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 20;
+}
+
+main[tabindex='-1']:focus,
+main[tabindex='-1']:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Keyboard Skip Link */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background-color: #102D38;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 2px solid #15B8A6;
+  box-shadow: 0 10px 25px -5px rgba(16, 45, 56, 0.35);
+  transition: top 150ms ease-out;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 1rem;
+  outline: 3px solid #FFFFFF;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 7px #102D38, 0 12px 28px -5px rgba(16, 45, 56, 0.45);
+}
+
+/* Form Validation & Focus Feedback */
+.form-field:focus {
+  border-color: #0D7A6E;
+}
+
+.form-field:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.form-field:focus-visible {
+  outline: 3px solid #102D38;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #FFFFFF;
+}
+
+.form-field:user-invalid {
+  border-color: #B42318;
+  background-color: #FEF3F2;
+}
+
+.form-field:user-valid {
+  border-color: #0D7A6E;
+}
+
+/* Native Modal Dialog & Scroll Containment */
+dialog.artwork-dialog {
+  margin: auto;
+  width: min(1040px, calc(100vw - 2rem));
+  max-width: 1040px;
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: 1rem;
+  background-color: #FFFFFF;
+  color: #1B252B;
+  box-shadow: 0 25px 50px -12px rgba(16, 45, 56, 0.45);
+  overscroll-behavior: contain;
+  overflow: hidden;
+}
+
+dialog.artwork-dialog::backdrop {
+  background-color: rgba(16, 45, 56, 0.88);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+html:has(dialog[open]:modal) {
+  overflow: hidden;
+}
+
+/* Subtle Same-Document View Transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 250ms ease-out forwards;
+}
+
+.work-tabpanel {
+  view-transition-name: work-panel;
+}
+
+::view-transition-old(root),
+::view-transition-new(root),
+::view-transition-old(work-panel),
+::view-transition-new(work-panel) {
+  animation-duration: 180ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .work-tabpanel {
+    view-transition-name: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

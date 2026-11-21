@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Search,
@@ -8,12 +7,14 @@ import {
   PenTool,
   CalendarRange,
 } from 'lucide-react';
+import TransitionLink from '../components/TransitionLink';
+import { prefersReducedMotion } from '../utils/viewTransitions';
 
 const Services: React.FC = () => {
   const scrollToService = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
     }
   };
 
@@ -28,9 +29,9 @@ const Services: React.FC = () => {
   return (
     <div className="pt-[72px]">
       {/* Opening Header */}
-      <section className="bg-[#102D38] text-white py-16 md:py-24">
+      <section data-surface="dark" className="bg-[#102D38] text-white py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
-          <div className="max-w-[78ch]">
+          <header className="max-w-[78ch]">
             <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
               Our Expertise
             </p>
@@ -41,16 +42,19 @@ const Services: React.FC = () => {
               From understanding markets and shaping brand strategy to managing brands and bringing
               ideas to life, we support organisations across the full brand journey.
             </p>
-          </div>
+          </header>
 
           {/* Clean Index Jump Strip */}
-          <div className="mt-12 pt-8 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <nav
+            aria-label="Jump to service area"
+            className="mt-12 pt-8 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
+          >
             {quickNav.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => scrollToService(item.id)}
-                className="text-left group py-2 pr-3 transition-colors focus-visible:outline-2 focus-visible:outline-[#15B8A6] rounded-sm"
+                className="text-left group py-2 pr-3 transition-colors rounded-sm"
               >
                 <span className="block font-heading text-xs font-bold text-[#15B8A6] tabular-nums mb-1">
                   {item.num}
@@ -60,7 +64,7 @@ const Services: React.FC = () => {
                 </span>
               </button>
             ))}
-          </div>
+          </nav>
         </div>
       </section>
 
@@ -68,7 +72,7 @@ const Services: React.FC = () => {
       <section id="service-01" className="bg-[#F4F3EE] py-16 lg:py-24 scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            <div className="lg:col-span-5">
+            <header className="lg:col-span-5">
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
                   01
@@ -86,7 +90,7 @@ const Services: React.FC = () => {
                 interpret evidence on customers, competitors and brand performance so leadership
                 teams act on fact rather than assumption.
               </p>
-            </div>
+            </header>
 
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
@@ -115,7 +119,7 @@ const Services: React.FC = () => {
                   desc: 'Post-campaign and commercial diagnostics evaluating communication clarity and market response.',
                 },
               ].map((cap) => (
-                <div
+                <article
                   key={cap.title}
                   className="bg-white border border-[#1B252B]/10 rounded-xl p-6"
                 >
@@ -123,7 +127,7 @@ const Services: React.FC = () => {
                     {cap.title}
                   </h3>
                   <p className="text-sm text-[#344249] leading-[1.6]">{cap.desc}</p>
-                </div>
+                </article>
               ))}
             </div>
           </div>
@@ -135,7 +139,7 @@ const Services: React.FC = () => {
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6 order-2 lg:order-1">
-              <div className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
+              <figure className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
                 <img
                   src="/assets/recovery/workplace/workplace_studio_3.jpg"
                   alt="Colleagues reviewing brand positioning and strategy material together at a desk"
@@ -143,26 +147,28 @@ const Services: React.FC = () => {
                   loading="lazy"
                   className="w-full h-full object-cover object-top"
                 />
-              </div>
+              </figure>
             </div>
 
             <div className="lg:col-span-6 order-1 lg:order-2">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
-                  02
-                </span>
-                <Compass size={18} className="text-[#102D38]" aria-hidden="true" />
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0D7A6E]">
-                  Strategy &amp; Identity
-                </span>
-              </div>
-              <h2 className="font-heading text-[28px] md:text-[36px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance mb-4">
-                Brand Strategy &amp; Development
-              </h2>
-              <p className="text-[#344249] text-base md:text-[17px] leading-[1.68] mb-8">
-                We translate insight into coherent strategic direction and distinctive identity
-                systems that define what a brand stands for and how it competes.
-              </p>
+              <header>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
+                    02
+                  </span>
+                  <Compass size={18} className="text-[#102D38]" aria-hidden="true" />
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0D7A6E]">
+                    Strategy &amp; Identity
+                  </span>
+                </div>
+                <h2 className="font-heading text-[28px] md:text-[36px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance mb-4">
+                  Brand Strategy &amp; Development
+                </h2>
+                <p className="text-[#344249] text-base md:text-[17px] leading-[1.68] mb-8">
+                  We translate insight into coherent strategic direction and distinctive identity
+                  systems that define what a brand stands for and how it competes.
+                </p>
+              </header>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
                 {[
@@ -191,12 +197,12 @@ const Services: React.FC = () => {
                     desc: 'Structuring parent brands, sub-brands and product lines for clarity and scale.',
                   },
                 ].map((cap) => (
-                  <div key={cap.title} className="border-t border-[#1B252B]/12 pt-3.5">
+                  <article key={cap.title} className="border-t border-[#1B252B]/12 pt-3.5">
                     <h3 className="font-heading text-[15px] font-bold text-[#1B252B] mb-1">
                       {cap.title}
                     </h3>
                     <p className="text-sm text-[#344249] leading-[1.55]">{cap.desc}</p>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
@@ -208,7 +214,7 @@ const Services: React.FC = () => {
       <section id="service-03" className="bg-[#EAF5F3] py-16 lg:py-24 scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-12">
-            <div className="lg:col-span-6">
+            <header className="lg:col-span-6">
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
                   03
@@ -232,10 +238,10 @@ const Services: React.FC = () => {
                 practical internal routines, this established service helps organisations make
                 sharper brand decisions and build stronger capability over time.
               </p>
-            </div>
+            </header>
 
             <div className="lg:col-span-6">
-              <div className="rounded-2xl overflow-hidden bg-[#D6E9E5] aspect-[4/3] shadow-sm">
+              <figure className="rounded-2xl overflow-hidden bg-[#D6E9E5] aspect-[4/3] shadow-sm">
                 <img
                   src="/assets/aistudio/ChatGPT_Image_Nov_17__2026__05_15_55_PM-2_cd046b1b.png"
                   alt="Workshop discussion on brand management governance and strategic alignment"
@@ -243,13 +249,13 @@ const Services: React.FC = () => {
                   loading="lazy"
                   className="w-full h-full object-cover object-center"
                 />
-              </div>
+              </figure>
             </div>
           </div>
 
           {/* Three Structured Dimensions of Brand Management & Advisory */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="bg-[#102D38] text-white rounded-2xl p-8">
+            <article data-surface="dark" className="bg-[#102D38] text-white rounded-2xl p-8">
               <p className="text-[#15B8A6] text-xs font-semibold uppercase tracking-[0.16em] mb-3">
                 03.1 · Diagnosis &amp; Structure
               </p>
@@ -266,9 +272,9 @@ const Services: React.FC = () => {
                   Structuring practical operating workflows, roles and standards tailored to your team.
                 </li>
               </ul>
-            </div>
+            </article>
 
-            <div className="bg-white border border-[#102D38]/10 rounded-2xl p-8">
+            <article className="bg-white border border-[#102D38]/10 rounded-2xl p-8">
               <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.16em] mb-3">
                 03.2 · Stewardship
               </p>
@@ -285,9 +291,9 @@ const Services: React.FC = () => {
                   Senior strategic counsel supporting new initiatives, partnerships and brand extensions.
                 </li>
               </ul>
-            </div>
+            </article>
 
-            <div className="bg-white border border-[#102D38]/10 rounded-2xl p-8">
+            <article className="bg-white border border-[#102D38]/10 rounded-2xl p-8">
               <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.16em] mb-3">
                 03.3 · Continuity
               </p>
@@ -304,7 +310,7 @@ const Services: React.FC = () => {
                   Retaining institutional brand knowledge so teams build on what works.
                 </li>
               </ul>
-            </div>
+            </article>
           </div>
         </div>
       </section>
@@ -314,23 +320,25 @@ const Services: React.FC = () => {
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
-                  04
-                </span>
-                <PenTool size={18} className="text-[#102D38]" aria-hidden="true" />
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0D7A6E]">
-                  Creative Execution
-                </span>
-              </div>
-              <h2 className="font-heading text-[28px] md:text-[36px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance mb-4">
-                Creative &amp; Communications
-              </h2>
-              <p className="text-[#344249] text-base md:text-[17px] leading-[1.68] mb-8">
-                Ideas only create value when they connect with people clearly and memorably. We
-                craft visual, written and audiovisual communications tailored to the channels your
-                audiences use every day.
-              </p>
+              <header>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
+                    04
+                  </span>
+                  <PenTool size={18} className="text-[#102D38]" aria-hidden="true" />
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0D7A6E]">
+                    Creative Execution
+                  </span>
+                </div>
+                <h2 className="font-heading text-[28px] md:text-[36px] font-bold text-[#1B252B] leading-[1.15] tracking-[-0.02em] text-balance mb-4">
+                  Creative &amp; Communications
+                </h2>
+                <p className="text-[#344249] text-base md:text-[17px] leading-[1.68] mb-8">
+                  Ideas only create value when they connect with people clearly and memorably. We
+                  craft visual, written and audiovisual communications tailored to the channels your
+                  audiences use every day.
+                </p>
+              </header>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
                 {[
@@ -351,18 +359,18 @@ const Services: React.FC = () => {
                     desc: 'Photography, video, motion graphics and radio/audio production built for impact.',
                   },
                 ].map((cap) => (
-                  <div key={cap.title} className="border-t border-[#1B252B]/12 pt-3.5">
+                  <article key={cap.title} className="border-t border-[#1B252B]/12 pt-3.5">
                     <h3 className="font-heading text-[15px] font-bold text-[#1B252B] mb-1">
                       {cap.title}
                     </h3>
                     <p className="text-sm text-[#344249] leading-[1.55]">{cap.desc}</p>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
 
             <div className="lg:col-span-6">
-              <div className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
+              <figure className="rounded-2xl overflow-hidden bg-[#F4F3EE] aspect-[4/3]">
                 <img
                   src="/assets/recovery/workplace/workplace_aktivate_1.jpg"
                   alt="Creative team reviewing visual campaign proofs around a studio table"
@@ -370,7 +378,7 @@ const Services: React.FC = () => {
                   loading="lazy"
                   className="w-full h-full object-cover object-center"
                 />
-              </div>
+              </figure>
             </div>
           </div>
         </div>
@@ -380,7 +388,7 @@ const Services: React.FC = () => {
       <section id="service-05" className="bg-[#F4F3EE] py-16 lg:py-24 scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            <div className="lg:col-span-5">
+            <header className="lg:col-span-5">
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-heading text-sm font-bold text-[#0D7A6E] tabular-nums">
                   05
@@ -397,7 +405,7 @@ const Services: React.FC = () => {
                 We bring brands out into the real world through well-executed events, launches and
                 promotions that invite direct participation and create lasting goodwill.
               </p>
-            </div>
+            </header>
 
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
@@ -418,7 +426,7 @@ const Services: React.FC = () => {
                   desc: 'Field activations, sponsorships and cultural touchpoints tailored to local audiences.',
                 },
               ].map((cap) => (
-                <div
+                <article
                   key={cap.title}
                   className="bg-white border border-[#1B252B]/10 rounded-xl p-6"
                 >
@@ -426,7 +434,7 @@ const Services: React.FC = () => {
                     {cap.title}
                   </h3>
                   <p className="text-sm text-[#344249] leading-[1.6]">{cap.desc}</p>
-                </div>
+                </article>
               ))}
             </div>
           </div>
@@ -434,30 +442,30 @@ const Services: React.FC = () => {
       </section>
 
       {/* Closing CTA */}
-      <section className="bg-[#102D38] text-white py-16 lg:py-20">
+      <section data-surface="dark" className="bg-[#102D38] text-white py-16 lg:py-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-          <div className="max-w-[58ch]">
+          <header className="max-w-[58ch]">
             <p className="text-[#15B8A6] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
               Work With Aktivate
             </p>
             <h2 className="font-heading text-2xl md:text-4xl font-bold text-white leading-[1.15] tracking-tight text-balance">
               Looking for support across strategy, brand management or your next campaign?
             </h2>
-          </div>
+          </header>
           <div className="flex flex-wrap items-center gap-4 shrink-0">
-            <Link
+            <TransitionLink
               to="/work"
               className="inline-flex items-center justify-center border border-white/30 text-white hover:bg-white/10 font-semibold text-sm px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap transition-colors"
             >
               View Our Work
-            </Link>
-            <Link
+            </TransitionLink>
+            <TransitionLink
               to="/contact"
               className="inline-flex items-center justify-center gap-2 bg-[#15B8A6] text-[#102D38] hover:bg-[#1FD0BC] font-semibold text-sm px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap transition-colors"
             >
               <span>Start a Conversation</span>
               <ArrowRight size={16} aria-hidden="true" />
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </section>

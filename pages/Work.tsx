@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, X, Maximize2 } from 'lucide-react';
+import TransitionLink from '../components/TransitionLink';
+import { runViewTransition } from '../utils/viewTransitions';
 
 type WorkCategory =
   | 'All'
@@ -25,9 +26,16 @@ interface WorkItem {
   featured?: boolean;
 }
 
+const getTabId = (filter: WorkCategory): string =>
+  `work-tab-${filter.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+
 const Work: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<WorkCategory>('All');
   const [selectedItem, setSelectedItem] = useState<WorkItem | null>(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogScrollRef = useRef<HTMLDivElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const filters: WorkCategory[] = [
     'All',
@@ -123,14 +131,80 @@ const Work: React.FC = () => {
   ];
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSelectedItem(null);
+    const dialog = dialogRef.current;
+    if (!dialog) {
+      return;
+    }
+
+    if (selectedItem) {
+      if (!dialog.open) {
+        dialog.showModal();
       }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+      if (dialogScrollRef.current) {
+        dialogScrollRef.current.scrollTop = 0;
+      }
+    } else if (dialog.open) {
+      dialog.close();
+    }
+  }, [selectedItem]);
+
+  const openLightbox = (item: WorkItem, trigger?: HTMLElement | null) => {
+    openerRef.current = trigger ?? (document.activeElement as HTMLElement | null);
+    setSelectedItem(item);
+  };
+
+  const closeLightbox = () => {
+    if (dialogRef.current?.open) {
+      dialogRef.current.close();
+    } else {
+      setSelectedItem(null);
+    }
+  };
+
+  const handleDialogClose = () => {
+    setSelectedItem(null);
+    const opener = openerRef.current;
+    openerRef.current = null;
+    if (opener && opener.isConnected) {
+      requestAnimationFrame(() => opener.focus());
+    }
+  };
+
+  const handleDialogBackdropClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+    if (event.target === dialogRef.current) {
+      closeLightbox();
+    }
+  };
+
+  const selectFilter = (filter: WorkCategory, focusIndex?: number) => {
+    runViewTransition(() => {
+      setActiveFilter(filter);
+    });
+    if (typeof focusIndex === 'number') {
+      requestAnimationFrame(() => {
+        tabRefs.current[focusIndex]?.focus();
+      });
+    }
+  };
+
+  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let targetIndex: number | null = null;
+
+    if (event.key === 'ArrowRight') {
+      targetIndex = (index + 1) % filters.length;
+    } else if (event.key === 'ArrowLeft') {
+      targetIndex = (index - 1 + filters.length) % filters.length;
+    } else if (event.key === 'Home') {
+      targetIndex = 0;
+    } else if (event.key === 'End') {
+      targetIndex = filters.length - 1;
+    }
+
+    if (targetIndex !== null) {
+      event.preventDefault();
+      selectFilter(filters[targetIndex], targetIndex);
+    }
+  };
 
   const filteredItems =
     activeFilter === 'All'
@@ -145,9 +219,9 @@ const Work: React.FC = () => {
   return (
     <div className="pt-[72px]">
       {/* Opening Header */}
-      <section className="bg-[#102D38] text-white py-16 md:py-24">
+      <section data-surface="dark" className="bg-[#102D38] text-white py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
-          <div className="max-w-[72ch]">
+          <header className="max-w-[72ch]">
             <p className="text-[#15B8A6] text-xs md:text-[13px] font-semibold uppercase tracking-[0.18em] mb-4">
               Our Work
             </p>
@@ -158,24 +232,34 @@ const Work: React.FC = () => {
               Explore selected branding, research, communication and campaign work developed for
               organisations across different sectors.
             </p>
-          </div>
+          </header>
         </div>
       </section>
 
       {/* Filter Navigation */}
-      <div className="sticky top-[72px] z-30 bg-[#F4F3EE]/95 backdrop-blur-md border-b border-[#1B252B]/10">
+      <section
+        aria-label="Portfolio category filters"
+        className="sticky top-[72px] z-30 bg-[#F4F3EE]/95 backdrop-blur-md border-b border-[#1B252B]/10"
+      >
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 py-4 overflow-x-auto">
-          <div className="flex items-center gap-2 min-w-max" role="tablist" aria-label="Filter work by category">
-            {filters.map((filter) => {
+          <div className="flex items-center gap-2 min-w-max px-1 pr-6 md:pr-1" role="tablist" aria-label="Filter work by category">
+            {filters.map((filter, index) => {
               const isActive = activeFilter === filter;
               return (
                 <button
                   key={filter}
+                  ref={(el) => {
+                    tabRefs.current[index] = el;
+                  }}
+                  id={getTabId(filter)}
                   type="button"
                   role="tab"
                   aria-selected={isActive}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-[#15B8A6] ${
+                  aria-controls="work-tabpanel"
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={() => selectFilter(filter)}
+                  onKeyDown={(e) => handleTabKeyDown(e, index)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-150 ${
                     isActive
                       ? 'bg-[#102D38] text-white'
                       : 'bg-white text-[#1B252B] border border-[#1B252B]/12 hover:border-[#102D38]/40'
@@ -187,26 +271,34 @@ const Work: React.FC = () => {
             })}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Portfolio Showcase */}
       <section className="bg-[#F4F3EE] py-14 lg:py-20 min-h-[520px]">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12">
+        <div
+          id="work-tabpanel"
+          role="tabpanel"
+          aria-labelledby={getTabId(activeFilter)}
+          tabIndex={0}
+          className="work-tabpanel max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 rounded-xl"
+        >
           {activeFilter === 'Research & Brand Management' ? (
-            <div className="bg-white border border-[#1B252B]/12 rounded-2xl p-8 md:p-12 max-w-[960px]">
-              <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
-                Research &amp; Brand Management
-              </p>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#1B252B] mb-4">
-                Insight-led brand strategy and continuous brand governance
-              </h2>
-              <p className="text-[#344249] text-base leading-[1.7] mb-8 max-w-[68ch]">
-                Research and Brand Management sit at the core of Aktivate&apos;s established
-                practice. Because these engagements involve sensitive commercial data, internal
-                governance structures and proprietary leadership roadmaps, selected case
-                documentation is shared directly during client consultations rather than published
-                as open campaign boards.
-              </p>
+            <article className="bg-white border border-[#1B252B]/12 rounded-2xl p-8 md:p-12 max-w-[960px]">
+              <header>
+                <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
+                  Research &amp; Brand Management
+                </p>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#1B252B] mb-4">
+                  Insight-led brand strategy and continuous brand governance
+                </h2>
+                <p className="text-[#344249] text-base leading-[1.7] mb-8 max-w-[68ch]">
+                  Research and Brand Management sit at the core of Aktivate&apos;s established
+                  practice. Because these engagements involve sensitive commercial data, internal
+                  governance structures and proprietary leadership roadmaps, selected case
+                  documentation is shared directly during client consultations rather than published
+                  as open campaign boards.
+                </p>
+              </header>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
                 {[
@@ -226,7 +318,7 @@ const Work: React.FC = () => {
                       'Continuous counsel across product launches, portfolio architecture, communication reviews and internal capability building.',
                   },
                 ].map((pillar) => (
-                  <div
+                  <article
                     key={pillar.title}
                     className="rounded-xl bg-[#F4F3EE] border border-[#1B252B]/10 p-5"
                   >
@@ -234,32 +326,32 @@ const Work: React.FC = () => {
                       {pillar.title}
                     </h3>
                     <p className="text-sm text-[#344249] leading-[1.6]">{pillar.detail}</p>
-                  </div>
+                  </article>
                 ))}
               </div>
 
-              <div className="border-t border-[#1B252B]/10 pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <footer className="border-t border-[#1B252B]/10 pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <p className="text-sm text-[#344249]">
                   Selected credentials and sample deliverables are available on request.
                 </p>
                 <div className="flex flex-wrap items-center gap-4 shrink-0">
-                  <Link
+                  <TransitionLink
                     to="/services"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] whitespace-nowrap"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] whitespace-nowrap rounded-sm"
                   >
                     <span>Explore full capability</span>
                     <ArrowRight size={15} aria-hidden="true" />
-                  </Link>
-                  <Link
+                  </TransitionLink>
+                  <TransitionLink
                     to="/contact"
                     className="inline-flex items-center justify-center gap-2 bg-[#102D38] text-white hover:bg-[#1B252B] font-semibold text-sm px-5 py-2.5 rounded-lg whitespace-nowrap transition-colors"
                   >
                     <span>Request credentials</span>
                     <ArrowRight size={15} aria-hidden="true" />
-                  </Link>
+                  </TransitionLink>
                 </div>
-              </div>
-            </div>
+              </footer>
+            </article>
           ) : (
             <div className="space-y-8">
               {/* Featured Lead Project (when viewing All or Campaigns) */}
@@ -267,8 +359,9 @@ const Work: React.FC = () => {
                 <article className="bg-white border border-[#1B252B]/10 rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
                   <button
                     type="button"
-                    onClick={() => setSelectedItem(featuredItem)}
-                    className="lg:col-span-7 relative group bg-[#ECEAE3] aspect-[16/10] overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#15B8A6]"
+                    data-focus="inset"
+                    onClick={(e) => openLightbox(featuredItem, e.currentTarget)}
+                    className="lg:col-span-7 relative group bg-[#ECEAE3] aspect-[16/10] overflow-hidden text-left rounded-t-[15px] lg:rounded-tr-none lg:rounded-l-[15px]"
                     aria-label={`View full artwork for ${featuredItem.client}`}
                   >
                     <img
@@ -277,7 +370,7 @@ const Work: React.FC = () => {
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
-                    <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 bg-[#102D38]/90 text-white text-xs font-medium px-3 py-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 bg-[#102D38]/90 text-white text-xs font-medium px-3 py-1.5 rounded-md opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
                       <Maximize2 size={13} aria-hidden="true" />
                       <span>Inspect artwork</span>
                     </span>
@@ -285,30 +378,32 @@ const Work: React.FC = () => {
 
                   <div className="lg:col-span-5 p-8 lg:p-10 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-2 text-xs text-[#0D7A6E] font-semibold uppercase tracking-[0.16em] mb-3">
-                        <span>{featuredItem.category}</span>
-                      </div>
-                      <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#1B252B] mb-2">
-                        {featuredItem.client}
-                      </h2>
-                      <p className="text-sm font-medium text-[#102D38]/75 mb-5">
-                        {featuredItem.scope}
-                      </p>
+                      <header>
+                        <div className="flex items-center gap-2 text-xs text-[#0D7A6E] font-semibold uppercase tracking-[0.16em] mb-3">
+                          <span>{featuredItem.category}</span>
+                        </div>
+                        <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#1B252B] mb-2">
+                          {featuredItem.client}
+                        </h2>
+                        <p className="text-sm font-medium text-[#102D38]/75 mb-5">
+                          {featuredItem.scope}
+                        </p>
+                      </header>
                       <p className="text-[#344249] text-base leading-[1.65]">
                         {featuredItem.description}
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-5 border-t border-[#1B252B]/10">
+                    <footer className="mt-8 pt-5 border-t border-[#1B252B]/10">
                       <button
                         type="button"
-                        onClick={() => setSelectedItem(featuredItem)}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] transition-colors"
+                        onClick={(e) => openLightbox(featuredItem, e.currentTarget)}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#102D38] hover:text-[#0D7A6E] transition-colors rounded-sm"
                       >
                         <span>View full visual montage</span>
                         <ArrowRight size={15} aria-hidden="true" />
                       </button>
-                    </div>
+                    </footer>
                   </div>
                 </article>
               )}
@@ -323,8 +418,9 @@ const Work: React.FC = () => {
                     {item.image ? (
                       <button
                         type="button"
-                        onClick={() => setSelectedItem(item)}
-                        className="relative group bg-[#ECEAE3] aspect-[16/10] overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#15B8A6]"
+                        data-focus="inset"
+                        onClick={(e) => openLightbox(item, e.currentTarget)}
+                        className="relative group bg-[#ECEAE3] aspect-[16/10] overflow-hidden text-left rounded-t-[15px]"
                         aria-label={`View full artwork for ${item.client}`}
                       >
                         <img
@@ -334,13 +430,14 @@ const Work: React.FC = () => {
                           loading="lazy"
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                         />
-                        <span className="absolute bottom-3.5 right-3.5 inline-flex items-center gap-1.5 bg-[#102D38]/90 text-white text-xs font-medium px-3 py-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="absolute bottom-3.5 right-3.5 inline-flex items-center gap-1.5 bg-[#102D38]/90 text-white text-xs font-medium px-3 py-1.5 rounded-md opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
                           <Maximize2 size={13} aria-hidden="true" />
                           <span>Inspect</span>
                         </span>
                       </button>
                     ) : (
-                      <div
+                      <figure
+                        data-surface="dark"
                         className="aspect-[16/10] bg-[#102D38] border-b border-[#102D38]/10 p-7 flex flex-col justify-between text-white"
                         aria-label={`${item.client} editorial showcase plate`}
                       >
@@ -360,32 +457,34 @@ const Work: React.FC = () => {
                           </p>
                         </div>
 
-                        <div className="pt-3 border-t border-white/12 flex items-center justify-between text-xs text-white/70">
+                        <figcaption className="pt-3 border-t border-white/12 flex items-center justify-between text-xs text-white/70">
                           <span>Aktivate Creative Studio</span>
-                          <Link
+                          <TransitionLink
                             to="/contact"
-                            className="font-medium text-[#15B8A6] hover:underline"
+                            className="font-medium text-[#15B8A6] hover:underline rounded-sm"
                           >
                             Request visuals
-                          </Link>
-                        </div>
-                      </div>
+                          </TransitionLink>
+                        </figcaption>
+                      </figure>
                     )}
 
                     <div className="p-7 flex flex-col justify-between flex-grow">
                       <div>
-                        <div className="flex flex-wrap items-center gap-2 text-xs mb-2">
-                          <span className="text-[#0D7A6E] font-semibold uppercase tracking-[0.14em]">
-                            {item.category}
-                          </span>
-                          <span className="text-[#344249]/50" aria-hidden="true">
-                            ·
-                          </span>
-                          <span className="text-[#344249]">{item.scope}</span>
-                        </div>
-                        <h2 className="font-heading text-xl md:text-2xl font-bold text-[#1B252B] mb-2">
-                          {item.client}
-                        </h2>
+                        <header>
+                          <div className="flex flex-wrap items-center gap-2 text-xs mb-2">
+                            <span className="text-[#0D7A6E] font-semibold uppercase tracking-[0.14em]">
+                              {item.category}
+                            </span>
+                            <span className="text-[#344249]/50" aria-hidden="true">
+                              ·
+                            </span>
+                            <span className="text-[#344249]">{item.scope}</span>
+                          </div>
+                          <h2 className="font-heading text-xl md:text-2xl font-bold text-[#1B252B] mb-2">
+                            {item.client}
+                          </h2>
+                        </header>
                         <p className="text-sm md:text-[15px] text-[#344249] leading-[1.6]">
                           {item.description}
                         </p>
@@ -403,7 +502,7 @@ const Work: React.FC = () => {
       {activeFilter === 'All' && (
         <section className="bg-white py-14 lg:py-18 border-t border-[#1B252B]/10">
           <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7">
+            <header className="lg:col-span-7">
               <p className="text-[#0D7A6E] text-xs font-semibold uppercase tracking-[0.18em] mb-3">
                 Research &amp; Brand Management
               </p>
@@ -415,34 +514,34 @@ const Work: React.FC = () => {
                 confidential market intelligence studies, Brand Management System architectures and
                 ongoing governance advisory for leadership teams across sectors.
               </p>
-            </div>
+            </header>
             <div className="lg:col-span-5 lg:flex lg:justify-end">
-              <Link
+              <TransitionLink
                 to="/contact"
                 className="inline-flex items-center justify-center gap-2.5 bg-[#102D38] text-white hover:bg-[#1B252B] font-semibold text-sm px-6 py-3.5 rounded-lg min-h-[46px] whitespace-nowrap transition-colors"
               >
                 <span>Discuss a project or mandate</span>
                 <ArrowRight size={16} aria-hidden="true" />
-              </Link>
+              </TransitionLink>
             </div>
           </div>
         </section>
       )}
 
-      {/* Lightbox Modal for Artwork Inspection */}
-      {selectedItem && (
-        <div
-          className="fixed inset-0 z-50 bg-[#102D38]/92 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="lightbox-title"
-          onClick={() => setSelectedItem(null)}
-        >
+      {/* Native Top-Layer Lightbox Dialog for Artwork Inspection */}
+      <dialog
+        ref={dialogRef}
+        className="artwork-dialog"
+        aria-labelledby="lightbox-title"
+        onClose={handleDialogClose}
+        onClick={handleDialogBackdropClick}
+      >
+        {selectedItem && (
           <div
-            className="bg-white rounded-2xl max-w-[1040px] w-full max-h-[90vh] overflow-y-auto shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            ref={dialogScrollRef}
+            className="max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain bg-white"
           >
-            <div className="flex items-start justify-between gap-4 px-6 py-5 border-b border-[#1B252B]/10">
+            <header className="flex items-start justify-between gap-4 px-6 py-5 border-b border-[#1B252B]/10">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0D7A6E] mb-1">
                   {selectedItem.category}
@@ -453,32 +552,32 @@ const Work: React.FC = () => {
               </div>
               <button
                 type="button"
-                onClick={() => setSelectedItem(null)}
+                onClick={closeLightbox}
                 className="w-10 h-10 inline-flex items-center justify-center rounded-lg text-[#1B252B] hover:bg-[#F4F3EE] transition-colors shrink-0"
                 aria-label="Close artwork preview"
               >
-                <X size={20} />
+                <X size={20} aria-hidden="true" />
               </button>
-            </div>
+            </header>
 
-            <div className="bg-[#ECEAE3] p-4 md:p-6 flex items-center justify-center">
+            <figure className="bg-[#ECEAE3] p-4 md:p-6 flex items-center justify-center">
               <img
                 src={selectedItem.image}
                 alt={`${selectedItem.client} — ${selectedItem.scope}`}
                 referrerPolicy="no-referrer"
-                className="max-h-[62vh] w-auto object-contain rounded-lg"
+                className="max-h-[62dvh] w-auto object-contain rounded-lg"
               />
-            </div>
+            </figure>
 
-            <div className="px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <footer className="px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="max-w-[62ch]">
                 <p className="text-sm font-semibold text-[#102D38] mb-1">{selectedItem.scope}</p>
                 <p className="text-sm text-[#344249] leading-[1.6]">{selectedItem.description}</p>
               </div>
-            </div>
+            </footer>
           </div>
-        </div>
-      )}
+        )}
+      </dialog>
     </div>
   );
 };

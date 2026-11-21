@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { prefersReducedMotion } from '../utils/viewTransitions';
 
 const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,7 +17,7 @@ const BackToTop: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
     });
   };
 
@@ -25,12 +26,14 @@ const BackToTop: React.FC = () => {
       <button
         type="button"
         onClick={scrollToTop}
-        className={`flex items-center justify-center w-11 h-11 rounded-full bg-[#102D38] text-white border border-white/15 shadow-lg transition-all duration-200 hover:bg-[#15B8A6] hover:text-[#102D38] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#15B8A6] ${
+        tabIndex={isVisible ? 0 : -1}
+        aria-hidden={!isVisible}
+        className={`flex items-center justify-center w-11 h-11 rounded-full bg-[#102D38] text-white border border-white/15 shadow-lg transition-all duration-200 hover:bg-[#15B8A6] hover:text-[#102D38] ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
         aria-label="Back to Top"
       >
-        <ArrowUp size={18} />
+        <ArrowUp size={18} aria-hidden="true" />
       </button>
     </div>
   );

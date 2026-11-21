@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -10,6 +9,8 @@ import Services from './pages/Services';
 import Work from './pages/Work';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
+import RouteSeo from './components/RouteSeo';
+import { prefersReducedMotion } from './utils/viewTransitions';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -20,12 +21,28 @@ const ScrollToTop = () => {
 };
 
 const App: React.FC = () => {
+  const handleSkipToMain = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const mainEl = document.getElementById('main-content');
+    if (mainEl) {
+      mainEl.focus({ preventScroll: true });
+      mainEl.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
     <Router>
+      <RouteSeo />
       <ScrollToTop />
       <div className="flex flex-col min-h-screen relative">
+        <a href="#main-content" onClick={handleSkipToMain} className="skip-link">
+          Skip to main content
+        </a>
         <Navbar />
-        <main className="flex-grow">
+        <main id="main-content" tabIndex={-1} className="flex-grow focus:outline-none">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
