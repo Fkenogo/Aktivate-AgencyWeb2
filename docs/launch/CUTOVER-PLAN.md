@@ -82,11 +82,16 @@ pointing at `50.87.170.107`:
 | Hostname | Change | Target |
 |---|---|---|
 | `mail` | orange → grey (A) | `50.87.170.107` |
-| `smtp` | orange → grey (A) | `50.87.170.107` |
-| `imap` | orange → grey (A) | `50.87.170.107` |
-| `pop` | orange → grey (A) | `50.87.170.107` |
+| `smtp` | orange → grey (A) | `50.87.170.107` (CNAME → mail; grey the CNAME's target) |
+| `imap` | orange → grey (A) | `50.87.170.107` (CNAME → mail) |
+| `pop` | orange → grey (A) | `50.87.170.107` (CNAME → mail) |
 | `webmail` | orange → grey (A) | `50.87.170.107` |
-| `cpanel` / `webdisk` / `autoconfig` / `autodiscover` | orange → grey (A) | `50.87.170.107` |
+| `cpanel` / `webdisk` / `whm` / `ftp` / `autoconfig` / `autodiscover` | orange → grey (A) | `50.87.170.107` |
+
+> **Note (2026-11-21):** authoritative export shows `smtp`/`pop`/`imap` are
+> **CNAMEs → `mail.aktivate.bi`**, so greying `mail` alone restores MX target +
+> IMAP/POP/SMTP client access in one minimal change. Grey the CNAME hostnames
+> too so they stop routing through the proxy.
 
 **Explicitly NOT changed:**
 - MX record and its target `_dc-mx.145957ebfa32.aktivate.bi` (verified working)
