@@ -42,13 +42,6 @@ export const CONTACT_SEO: RouteSeoMetadata = {
   pageType: 'ContactPage',
 };
 
-export const BLOG_SEO: RouteSeoMetadata = {
-  title: 'Insights & Perspectives | Aktivate Brand Agency',
-  description:
-    'Read articles and perspectives from Aktivate on brand management, market research, positioning and creative communication across East Africa.',
-  pageType: 'WebPage',
-};
-
 export const DEFAULT_SEO: RouteSeoMetadata = HOME_SEO;
 
 export const ROUTE_SEO_MAP: Record<string, RouteSeoMetadata> = {
@@ -57,7 +50,6 @@ export const ROUTE_SEO_MAP: Record<string, RouteSeoMetadata> = {
   '/work': WORK_SEO,
   '/about': ABOUT_SEO,
   '/contact': CONTACT_SEO,
-  '/blog': BLOG_SEO,
 };
 
 function upsertMetaTag(

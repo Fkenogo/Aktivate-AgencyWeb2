@@ -1,0 +1,17 @@
+{
+  // AKTIVATE — Cloudflare Workers with Static Assets (AKT-WEB-LAUNCH-001A)
+  // Preview worker: isolated on workers.dev, NOT connected to aktivate.bi.
+  // Production cutover happens only after Founder approval (separate change).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aktivate-website-preview",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    // The app uses HashRouter; SPA fallback keeps any stray paths rendering safely.
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
@@ -7,7 +7,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Work from './pages/Work';
-import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import RouteSeo from './components/RouteSeo';
 import { prefersReducedMotion } from './utils/viewTransitions';
@@ -48,8 +47,10 @@ const App: React.FC = () => {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/work" element={<Work />} />
-            <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            {/* Blog is unapproved legacy content and is intentionally not routed.
+                Unknown paths redirect to the homepage. */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
         <Footer />
