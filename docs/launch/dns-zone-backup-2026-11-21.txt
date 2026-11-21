@@ -17,7 +17,10 @@ www.aktivate.bi.        A       172.67.181.233
 
 ;; EMAIL — MAIL DELIVERY PATH (DNS-only, do not touch)
 aktivate.bi.            MX      0 _dc-mx.145957ebfa32.aktivate.bi.
-_dc-mx.145957ebfa32.aktivate.bi.  A  50.87.170.107   ; Bluehost/HostGator origin
+_dc-mx.145957ebfa32.aktivate.bi.  A  50.87.170.107   ; Bluehost origin
+                        ; reverse DNS: box2371.bluehost.com.
+                        ; ports verified 2026-11-21: 993 OPEN, 587 OPEN, 465 OPEN
+                        ; (port 25 unreachable from test network — ISP block, inconclusive)
 
 ;; EMAIL — AUTHENTICATION (do not touch)
 aktivate.bi.            TXT     "v=spf1 a mx include:websitewelcome.com ~all"

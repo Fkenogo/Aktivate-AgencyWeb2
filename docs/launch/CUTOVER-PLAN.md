@@ -25,9 +25,13 @@
 
 **Problem found — mail client hostnames are proxied (orange cloud):**
 `mail`, `smtp`, `pop`, `imap`, `webmail`, `cpanel`, `webdisk`, `autoconfig`,
-`autodiscover` all resolve to Cloudflare proxy IPs instead of `50.87.170.107`.
+`autodiscover` all resolve to Cloudflare proxy IPs instead of `50.87.170.107`
+(reverse DNS: `box2371.bluehost.com.`).
 Cloudflare's proxy does not carry SMTP (25/465/587), IMAP (143/993), POP (110/995),
-so any mail client configured against those hostnames **cannot connect**. Incoming
+so any mail client configured against those hostnames **cannot connect** —
+verified live 2026-11-21: `mail.aktivate.bi:993` and `:587` time out, while the
+Bluehost origin itself answers on 993/587/465. (Port 443 on the proxied hostname
+is open — Cloudflare serves web, not mail.) Incoming
 mail delivery (MX path) still works because the MX target itself is DNS-only.
 
 This is a pre-existing condition, not caused by this work. Correction is
