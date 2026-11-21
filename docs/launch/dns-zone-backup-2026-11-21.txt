@@ -1,0 +1,38 @@
+# Aktivate.bi DNS zone snapshot — 2026-11-21 (AKT-WEB-LAUNCH-001A)
+# Source: public DNS lookups (dig) against authoritative Cloudflare nameservers.
+# NOTE: snapshot taken BEFORE any website cutover. Keep for rollback reference.
+# Cloudflare-Dashboard "Export DNS records" is the authoritative copy at cutover time.
+
+;; NAMESERVERS
+aktivate.bi.            NS      ricardo.ns.cloudflare.com.
+aktivate.bi.            NS      ursula.ns.cloudflare.com.
+
+;; APEX / WWW (proxied through Cloudflare)
+aktivate.bi.            A       104.21.91.235
+aktivate.bi.            A       172.67.181.233
+aktivate.bi.            AAAA    2606:4700:3031::6815:5beb
+aktivate.bi.            AAAA    2606:4700:3035::ac43:b5e9
+www.aktivate.bi.        A       104.21.91.235   ; via proxy/CNAME flattening
+www.aktivate.bi.        A       172.67.181.233
+
+;; EMAIL — MAIL DELIVERY PATH (DNS-only, do not touch)
+aktivate.bi.            MX      0 _dc-mx.145957ebfa32.aktivate.bi.
+_dc-mx.145957ebfa32.aktivate.bi.  A  50.87.170.107   ; Bluehost/HostGator origin
+
+;; EMAIL — AUTHENTICATION (do not touch)
+aktivate.bi.            TXT     "v=spf1 a mx include:websitewelcome.com ~all"
+default._domainkey.aktivate.bi.  TXT  "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0YIoaSDr1mJENUNIGnmyH9afKMl+Hapn5/Ps6Z4A7AJ6PC3rlya5rFSHxgtp5XZuDLd73sEZoNSzzcg3AYjhxipKm3Lb5NXYHCYJiY8kh0URrPgsVbKo7A9Zif+hwFd7loYPjImVthJtbMUDQFu69sa9fWjbGQj2e5yyLZmlCttPcZNuia2RYnfTqTi7UfH4p" "+2TmzCXcvnGC6MWSp0YMBWzAoTY15G/jjxVyf/zCcMcqi7bH2B12xVJBQu8RAiyQ8EniOUEmLsmM7SA2fxlbxY8NVHd2ZHETR1Ec8ChoMasfhhRHxMCOGX/hfSmOzusf+wZTOmfZ2ZMDnnhlJMBiwIDAQAB;"
+_dmarc.aktivate.bi.     TXT     "v=DMARC1; p=none; rua=mailto:3dd17b17@mxtoolbox.dmarc-report.com; ruf=mailto:3dd17b17@forensics.dmarc-report.com; fo=1"
+
+;; EMAIL CLIENT / CPANEL HOSTNAMES — PROXIED (orange cloud) — pre-existing issue
+;; These resolve to Cloudflare proxy IPs (104.21.91.235 / 172.67.181.233) instead
+;; of 50.87.170.107, breaking IMAP/POP/SMTP client connections. See CUTOVER-PLAN.md §3.
+; mail.aktivate.bi       A       <proxied>   (expected true record: 50.87.170.107, grey cloud)
+; smtp.aktivate.bi       A       <proxied>
+; imap.aktivate.bi       A       <proxied>
+; pop.aktivate.bi        A       <proxied>
+; webmail.aktivate.bi    A       <proxied>
+; cpanel.aktivate.bi     A       <proxied>
+; webdisk.aktivate.bi    A       <proxied>
+; autoconfig.aktivate.bi A       <proxied>
+; autodiscover.aktivate.bi A     <proxied>
